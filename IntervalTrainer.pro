@@ -12,11 +12,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    sensor.cpp \
-    interval.cpp
+	interval.cpp \
+	note.cpp \
+    guitarboard.cpp
 
 HEADERS  += mainwindow.h \
-    sensor.h \
-    interval.h
+	interval.h \
+	note.h \
+    guitarboard.h
 
 FORMS    += mainwindow.ui
