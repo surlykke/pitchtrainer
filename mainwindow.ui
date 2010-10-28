@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>788</width>
-    <height>388</height>
+    <width>786</width>
+    <height>386</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -48,7 +48,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>40</pointsize>
+      <pointsize>18</pointsize>
      </font>
     </property>
     <property name="text">
@@ -77,24 +77,6 @@
     </property>
     <property name="text">
      <string>New interval</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="changeExerciseButton">
-    <property name="geometry">
-     <rect>
-      <x>590</x>
-      <y>280</y>
-      <width>180</width>
-      <height>60</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Change exercise</string>
     </property>
    </widget>
    <widget class="QPushButton" name="giveUpButton">

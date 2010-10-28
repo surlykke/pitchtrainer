@@ -7,7 +7,6 @@ class Interval
 public:
     Interval();
 	void play();
-private:
 	Note note1;
 	Note note2;
 };

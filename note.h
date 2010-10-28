@@ -10,7 +10,7 @@ public:
 	Note(std::string note, int octave);
 	std::string getNote();
 	int getOctave();
-	Note operator++();
+	friend Note& operator++(Note &note);
 	bool operator==(Note note);
 	Note operator+(int semitones);
 	Note operator-(int semitones);

@@ -26,11 +26,11 @@ std::ostream& operator <<(std::ostream &out, Note &note)
 	return (out << note.getNote() << note.getOctave());
 }
 
-Note Note::operator++()
+Note& operator++(Note &note)
 {
-	int newNote_index = (note_index + 1) % 12;
-	int newOctave = octave + (note_index + 1)/12;
-	return Note(newNote_index, newOctave);
+	note.octave = note.octave + (note.note_index + 1)/12;
+	note.note_index = (note.note_index + 1) % 12;
+	return note;
 }
 
 Note Note::operator +(int i)
@@ -41,6 +41,11 @@ Note Note::operator +(int i)
 Note Note::operator -(int i)
 {
 	return Note(note_index - i, octave);
+}
+
+bool Note::operator ==(Note note)
+{
+	return note.note_index == note_index && note.octave == octave;
 }
 
 Note::Note(int i, int octave)
