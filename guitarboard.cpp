@@ -56,6 +56,16 @@ void GuitarBoard::unshowNotes()
 	}
 }
 
+Note GuitarBoard::min()
+{
+	return looseStringNote(5);
+}
+
+Note GuitarBoard::max()
+{
+	return looseStringNote(0) + 12;
+}
+
 
 void GuitarBoard::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {

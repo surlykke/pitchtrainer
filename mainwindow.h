@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QGraphicsEllipseItem>
-#include "interval.h"
 #include "guitarboard.h"
 
 namespace Ui {
@@ -28,7 +27,7 @@ public slots:
 private:
 	Ui::MainWindow *ui;
 	GuitarBoard *guitarBoard;
-	Interval* interval;
+	Note note1, note2;
 };
 
 #endif // MAINWINDOW_H

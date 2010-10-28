@@ -6,8 +6,15 @@ Note::Note(std::string note, int octave)
 	this->octave = octave;
 }
 
+Note::Note()
+{
+	note_index = string2int("A");
+	octave = 5;
+}
+
 std::string Note::getNote()
 {
+	std::cout << "Ind i getNote, index = " << note_index << std::endl;
 	return int2string(note_index);
 }
 
@@ -43,6 +50,11 @@ Note Note::operator -(int i)
 	return Note(note_index - i, octave);
 }
 
+int Note::operator-(Note n)
+{
+	return 12*(octave - n.octave) + note_index - n.note_index;
+}
+
 bool Note::operator ==(Note note)
 {
 	return note.note_index == note_index && note.octave == octave;
@@ -50,7 +62,7 @@ bool Note::operator ==(Note note)
 
 Note::Note(int i, int octave)
 {
-	note_index = i % 12;
+	note_index = ((i % 12) + 12) % 12;
 	this->octave = octave + i/12;
 }
 

@@ -12,12 +12,10 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-	interval.cpp \
 	note.cpp \
     guitarboard.cpp
 
 HEADERS  += mainwindow.h \
-	interval.h \
 	note.h \
     guitarboard.h
 

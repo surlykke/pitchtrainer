@@ -3,7 +3,6 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsItem>
-#include "interval.h"
 #include "note.h"
 
 class GuitarBoard : public QGraphicsScene
@@ -20,6 +19,8 @@ public:
     explicit GuitarBoard(QObject *parent = 0);
 	void show(Note note, bool isAnswer = false);
 	void unshowNotes();
+	Note min();
+	Note max();
 
 signals:
 	void guess(Note& note);

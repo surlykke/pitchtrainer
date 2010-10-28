@@ -8,14 +8,16 @@ class Note
 {
 public:
 	Note(std::string note, int octave);
+	Note();
 	std::string getNote();
 	int getOctave();
 	friend Note& operator++(Note &note);
 	bool operator==(Note note);
 	Note operator+(int semitones);
 	Note operator-(int semitones);
-	void play();
+	int operator-(Note note);
 	friend std::ostream& operator<< (std::ostream &out, Note &note);
+	void play();
 
 private:
 	Note(int i, int octave);
