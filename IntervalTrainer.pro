@@ -12,11 +12,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-	note.cpp \
-    guitarboard.cpp
+    guitarboard.cpp \
+    midiplayer.cpp
 
 HEADERS  += mainwindow.h \
-	note.h \
-    guitarboard.h
+    guitarboard.h \
+    midiplayer.h \
+    note.h
 
 FORMS    += mainwindow.ui

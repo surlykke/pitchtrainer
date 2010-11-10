@@ -3,10 +3,11 @@
 #include <iostream>
 #include <QMessageBox>
 #include "guitarboard.h"
+#include "midiplayer.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+	ui(new Ui::MainWindow), note1(69), note2(69)
 {
     ui->setupUi(this);
 	guitarBoard = new GuitarBoard(parent);
@@ -18,7 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->newIntervalButton, SIGNAL(clicked()), SLOT(newInterval()));
 	connect(ui->repeatButton, SIGNAL(clicked()), SLOT(repeat()));
 	connect(ui->giveUpButton, SIGNAL(clicked()), SLOT(giveUp()));
-	connect(guitarBoard, SIGNAL(guess(Note&)), SLOT(guess(Note&)));
+	connect(this, SIGNAL(noteGiven(Note)), guitarBoard, SLOT(noteGiven(Note)));
+	connect(guitarBoard, SIGNAL(guess(Note)), SLOT(guess(Note)));
 }
 
 void MainWindow::newInterval()
@@ -29,33 +31,32 @@ void MainWindow::newInterval()
 	while (space == 0) {
 		space = rand() % 21 - 10;
 	}
-	std::cout << "Danner note2, note1 = " << note1 << ", space = " << space << std::endl;
 	note2 = note1 + space;
-	note1.play();
-	note2.play();
+	std::cout << "Note1: " << note1 << ", note2: " << note2 << std::endl;
 	ui->repeatButton->setEnabled(true);
 	ui->giveUpButton->setEnabled(true);
-	guitarBoard->unshowNotes();
-	guitarBoard->show(note1);
+	midiPlayer.playInterval(note1, note2);
+	emit noteGiven(note1);
+
 }
 
 void MainWindow::repeat()
 {
-	note1.play();
-	note2.play();
+	midiPlayer.playInterval(note1, note2);
 }
 
 void MainWindow::giveUp()
 {
-	guitarBoard->show(note2, true);
+	guitarBoard->noteGiven(note2);
 	ui->repeatButton->setEnabled(false);
 	ui->giveUpButton->setEnabled(false);
 
 }
 
-void MainWindow::guess(Note &note)
+void MainWindow::guess(Note note)
 {
 	std::cout << "Ind i guess" << std::endl;
+	midiPlayer.playNote(note);
 	if (note == note2)
 	{
 		ui->message->setText("Correct!");
