@@ -35,14 +35,14 @@ void MainWindow::newInterval()
 	std::cout << "Note1: " << note1 << ", note2: " << note2 << std::endl;
 	ui->repeatButton->setEnabled(true);
 	ui->giveUpButton->setEnabled(true);
-	midiPlayer.playInterval(note1, note2);
+	midiPlayer.play(note1, note2);
 	emit noteGiven(note1);
 
 }
 
 void MainWindow::repeat()
 {
-	midiPlayer.playInterval(note1, note2);
+	midiPlayer.play(note1, note2);
 }
 
 void MainWindow::giveUp()
@@ -56,7 +56,7 @@ void MainWindow::giveUp()
 void MainWindow::guess(Note note)
 {
 	std::cout << "Ind i guess" << std::endl;
-	midiPlayer.playNote(note);
+	midiPlayer.play(note);
 	if (note == note2)
 	{
 		ui->message->setText("Correct!");

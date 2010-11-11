@@ -105,7 +105,9 @@ QGraphicsItem* GuitarBoard::addCircleOnString(int band, int string, QColor color
 		x = - circleRadius - 3;
 	}
 	else {
-		if (band > 12) band = 12;
+		if (band > 12) {
+			band = 12;
+		}
 		x = (bandPosition(band) + bandPosition(band - 1))/2; - circleRadius;
 	}
 	double y = stringPosY(string);
