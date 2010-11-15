@@ -74,21 +74,38 @@ void GuitarBoard::removeGuessCircle() {
 	}
 }
 
-void GuitarBoard::noteGiven(Note note) {
+void GuitarBoard::newExcercise(QList<Note>& notes) {
+	clearNotes();
+	showNotes(notes, false);
+}
+
+void GuitarBoard::answer(QList<Note>& notes) {
+	showNotes(notes, true);
+}
+
+
+void GuitarBoard::showNotes(QList<Note> &notes, bool answer) {
+	QList<Note>::Iterator iterator;
+	for (iterator = notes.begin(); iterator != notes.end(); iterator++) {
+		Note note = *iterator;
+		for (int string = 0; string < 6; string++) {
+			int band = note - looseStringNote(string);
+			if (0 <= band && band < 13) {
+				tmpCircles.push_back(addCircleOnString(band, string, answer ? Qt::darkRed : Qt::darkGreen));
+			}
+		}
+	}
+}
+
+void GuitarBoard::clearNotes() {
 	while (tmpCircles.size() > 0) {
 		QGraphicsItem *circle = tmpCircles.at(tmpCircles.size() - 1);
 		tmpCircles.pop_back();
 		removeItem(circle);
 		delete circle;
 	}
-
-	for (int string = 0; string < 6; string++) {
-		int band = note - looseStringNote(string);
-		if (0 <= band && band < 13) {
-			tmpCircles.push_back(addCircleOnString(band, string, Qt::darkGreen));
-		}
-	}
 }
+
 
 QGraphicsItem* GuitarBoard::addCircleAt(double centX, double centY, QColor color) {
 	QGraphicsEllipseItem* result = new QGraphicsEllipseItem(centX - circleRadius, centY - circleRadius, 2*circleRadius, 2*circleRadius);

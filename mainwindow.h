@@ -5,6 +5,7 @@
 #include <QGraphicsEllipseItem>
 #include "guitarboard.h"
 #include "midiplayer.h"
+#include <QList>
 
 namespace Ui {
     class MainWindow;
@@ -20,7 +21,8 @@ public:
     ~MainWindow();
 
 signals:
-	void noteGiven(Note note);
+	void newExcercise(QList<Note>& notes);
+	void answer(QList<Note>& notes);
 
 public slots:
 	void newInterval();
@@ -33,6 +35,7 @@ private:
 	GuitarBoard *guitarBoard;
 	Note note1, note2;
 	MidiPlayer midiPlayer;
+	bool answerGiven;
 };
 
 #endif // MAINWINDOW_H

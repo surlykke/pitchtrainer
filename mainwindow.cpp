@@ -19,7 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->newIntervalButton, SIGNAL(clicked()), SLOT(newInterval()));
 	connect(ui->repeatButton, SIGNAL(clicked()), SLOT(repeat()));
 	connect(ui->giveUpButton, SIGNAL(clicked()), SLOT(giveUp()));
-	connect(this, SIGNAL(noteGiven(Note)), guitarBoard, SLOT(noteGiven(Note)));
+	connect(this, SIGNAL(newExcercise(QList<Note>&)), guitarBoard, SLOT(newExcercise(QList<Note>&)));
+	connect(this, SIGNAL(answer(QList<Note>&)), guitarBoard, SLOT(answer(QList<Note>&)));
 	connect(guitarBoard, SIGNAL(guess(Note)), SLOT(guess(Note)));
 }
 
@@ -36,7 +37,9 @@ void MainWindow::newInterval()
 	ui->repeatButton->setEnabled(true);
 	ui->giveUpButton->setEnabled(true);
 	midiPlayer.play(note1, note2);
-	emit noteGiven(note1);
+	answerGiven = false;
+	ui->message->setText("Identify the interval");
+	emit newExcercise(QList<Note>() << note1);
 
 }
 
@@ -47,19 +50,30 @@ void MainWindow::repeat()
 
 void MainWindow::giveUp()
 {
-	guitarBoard->noteGiven(note2);
+	if (answerGiven) {
+		return;
+	}
 	ui->repeatButton->setEnabled(false);
 	ui->giveUpButton->setEnabled(false);
+	ui->message->setText(QString("The notes were: %1 and %2").arg(note1).arg(note2));
+	answerGiven = true;
+	emit answer(QList<Note>() << note2);
 
 }
 
 void MainWindow::guess(Note note)
 {
+	if (answerGiven) {
+		return;
+	}
 	std::cout << "Ind i guess" << std::endl;
 	midiPlayer.play(note);
 	if (note == note2)
 	{
-		ui->message->setText("Correct!");
+		ui->message->setText(QString("Correct! - The notes were: %1 and %2").arg(note1).arg(note2));
+		answerGiven = true;
+		ui->giveUpButton->setEnabled(false);
+		emit answer(QList<Note>() << note2);
 	}
 	else
 	{

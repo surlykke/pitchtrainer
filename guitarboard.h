@@ -5,6 +5,7 @@
 #include <QGraphicsItem>
 #include <QTimer>
 #include "note.h"
+#include <QList>
 
 class GuitarBoard : public QGraphicsScene
 {
@@ -21,7 +22,8 @@ signals:
 
 public slots:
 	void guessShown();
-	void noteGiven(Note note);
+	void newExcercise(QList<Note>& notes);
+	void answer(QList<Note>& notes);
 
 protected:
 	void mousePressEvent(QGraphicsSceneMouseEvent *event);
@@ -35,6 +37,8 @@ private:
 	static const int spaceBetweenStrings = (boardWidth - 2*spaceBesideStrings)/5;
 	static const double twelftRootOf2 = 1.0594630943593;
 
+	void showNotes(QList<Note> &notes, bool answer);
+	void clearNotes();
 	QGraphicsItem* addCircleAt(double centX, double centY, QColor color);
 	QGraphicsItem* addCircleOnString(int band, int string, QColor color);
 	void removeGuessCircle();
