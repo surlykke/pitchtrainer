@@ -5,7 +5,7 @@
 #include <QGraphicsEllipseItem>
 #include "guitarboard.h"
 #include "midiplayer.h"
-#include <QList>
+#include <QString>
 
 namespace Ui {
     class MainWindow;
@@ -36,6 +36,11 @@ private:
 	Note note1, note2;
 	MidiPlayer midiPlayer;
 	bool answerGiven;
+
+    // Utils
+    QString intervalName(Note note1, Note note2);
+    QString noteName(Note n);
+
 };
 
 #endif // MAINWINDOW_H

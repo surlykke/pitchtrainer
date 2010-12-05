@@ -4,6 +4,8 @@
 #include <QMessageBox>
 #include "guitarboard.h"
 #include "midiplayer.h"
+#include <QList>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -33,10 +35,10 @@ void MainWindow::newInterval()
 		space = rand() % 21 - 10;
 	}
 	note2 = note1 + space;
-	std::cout << "Note1: " << note1 << ", note2: " << note2 << std::endl;
+    qDebug() << noteName(note1) << "-->" << noteName(note2) << "    " << intervalName(note1, note2);
 	ui->repeatButton->setEnabled(true);
 	ui->giveUpButton->setEnabled(true);
-	midiPlayer.play(note1, note2);
+        midiPlayer.playInterval(note1, note2);
 	answerGiven = false;
 	ui->message->setText("Identify the interval");
 	emit newExcercise(QList<Note>() << note1);
@@ -45,7 +47,7 @@ void MainWindow::newInterval()
 
 void MainWindow::repeat()
 {
-	midiPlayer.play(note1, note2);
+        midiPlayer.playInterval(note1, note2);
 }
 
 void MainWindow::giveUp()
@@ -55,7 +57,7 @@ void MainWindow::giveUp()
 	}
 	ui->repeatButton->setEnabled(false);
 	ui->giveUpButton->setEnabled(false);
-	ui->message->setText(QString("The notes were: %1 and %2").arg(note1).arg(note2));
+        ui->message->setText(QString("%1 ->  %2   %3").arg(noteName(note1)).arg(noteName(note2)).arg(intervalName(note1, note2)));
 	answerGiven = true;
 	emit answer(QList<Note>() << note2);
 
@@ -67,10 +69,10 @@ void MainWindow::guess(Note note)
 		return;
 	}
 	std::cout << "Ind i guess" << std::endl;
-	midiPlayer.play(note);
+        midiPlayer.playNote(note);
 	if (note == note2)
 	{
-		ui->message->setText(QString("Correct! - The notes were: %1 and %2").arg(note1).arg(note2));
+                ui->message->setText(QString("Correct!  %1 -> %2   %3").arg(noteName(note1)).arg(noteName(note2)).arg(intervalName(note1, note2)));
 		answerGiven = true;
 		ui->giveUpButton->setEnabled(false);
 		emit answer(QList<Note>() << note2);
@@ -83,4 +85,41 @@ void MainWindow::guess(Note note)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+QString MainWindow::intervalName(Note n1, Note n2) {
+    static QList<QString> intervalNames;
+
+    if (intervalNames.size() == 0) {
+           intervalNames <<
+            "Perfect Unison" <<
+            "Minor second" <<
+            "Major second" <<
+            "Minor third" <<
+            "Major third" <<
+            "Perfect fourth" <<
+            "Diminished fifth" <<
+            "Perfect fifth" <<
+            "Minor sixth" <<
+            "Major sixth" <<
+            "Minor seventh" <<
+            "Major seventh" <<
+            "Perfect octave";
+    }
+
+    std::cout << n1 << ", " << n2 << " = " << (n2>n1? n2-n1:n1-n2) << std::endl;
+    int diff = n2 >= n1 ? n2 - n1 : n1 - n2;
+    return diff > 12 ? "?" : intervalNames.at(diff);
+}
+
+QString MainWindow::noteName(Note n) {
+    static QList<QString> noteNames;
+
+    if (noteNames.size() == 0) {
+        noteNames << "C" << "C#" << "D" << "D#" << "E" << "F" << "F#" << "G" << "G#" << "A" << "A#" << "B";
+    }
+
+   int noteNumber = (((n - 60) % 12)  + 12) % 12;
+   int octaveNumber = 4 + ((n - 60)/ 12);
+   return noteNames.at(noteNumber) + QString::number(octaveNumber);
 }
