@@ -4,13 +4,20 @@
 #include <QMessageBox>
 #include "guitarboard.h"
 #include "midiplayer.h"
+#include "settings.h"
 #include <QList>
 #include <QDebug>
+#include "ui_settings.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-	ui(new Ui::MainWindow), note1(69), note2(69)
+    ui(new Ui::MainWindow)
 {
+    QCoreApplication::setOrganizationName("Surlykke IT");
+    QCoreApplication::setOrganizationDomain("surlykke-it.dk");
+    QCoreApplication::setApplicationName("Pitch Trainer");
+    huske = new QSettings();
+    midiPlayer.setInstrument(huske->value("instrument").toInt());
     ui->setupUi(this);
 	guitarBoard = new GuitarBoard(parent);
 	ui->graphicsView->setScene(guitarBoard);
@@ -20,7 +27,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->giveUpButton->setEnabled(false);
 	connect(ui->newIntervalButton, SIGNAL(clicked()), SLOT(newInterval()));
 	connect(ui->repeatButton, SIGNAL(clicked()), SLOT(repeat()));
-	connect(ui->giveUpButton, SIGNAL(clicked()), SLOT(giveUp()));
+    connect(ui->giveUpButton, SIGNAL(clicked()), SLOT(giveUp()));
+    connect(ui->settingsButton, SIGNAL(clicked()), SLOT(settings()));
 	connect(this, SIGNAL(newExcercise(QList<Note>&)), guitarBoard, SLOT(newExcercise(QList<Note>&)));
 	connect(this, SIGNAL(answer(QList<Note>&)), guitarBoard, SLOT(answer(QList<Note>&)));
 	connect(guitarBoard, SIGNAL(guess(Note)), SLOT(guess(Note)));
@@ -32,7 +40,7 @@ void MainWindow::newInterval()
 	note1 = guitarBoard->min() + 10 + rand() % span;
 	int space = 0;
 	while (space == 0) {
-		space = rand() % 21 - 10;
+                space = rand() % 21 - 10;
 	}
 	note2 = note1 + space;
     qDebug() << noteName(note1) << "-->" << noteName(note2) << "    " << intervalName(note1, note2);
@@ -63,6 +71,14 @@ void MainWindow::giveUp()
 
 }
 
+void MainWindow::settings()
+{
+    Settings settingsDialog(huske->value("instrument").toInt());
+    connect(settingsDialog.ui->instrumentBox, SIGNAL(currentIndexChanged(int)), SLOT(instrumentChanged(int)));
+    settingsDialog.exec();
+}
+
+
 void MainWindow::guess(Note note)
 {
 	if (answerGiven) {
@@ -82,6 +98,12 @@ void MainWindow::guess(Note note)
 		ui->message->setText("Wrong!");
 	}
 }
+
+void MainWindow::instrumentChanged(int newInstrument) {
+    huske->setValue("instrument", newInstrument);
+    midiPlayer.setInstrument(newInstrument);
+}
+
 MainWindow::~MainWindow()
 {
     delete ui;

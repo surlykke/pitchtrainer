@@ -6,6 +6,7 @@
 #include "guitarboard.h"
 #include "midiplayer.h"
 #include <QString>
+#include <QSettings>
 
 namespace Ui {
     class MainWindow;
@@ -28,7 +29,9 @@ public slots:
 	void newInterval();
 	void repeat();
 	void giveUp();
-	void guess(Note note);
+    void settings();
+    void guess(Note note);
+    void instrumentChanged(int newInstrument);
 
 private:
 	Ui::MainWindow *ui;
@@ -40,7 +43,7 @@ private:
     // Utils
     QString intervalName(Note note1, Note note2);
     QString noteName(Note n);
-
+    QSettings *huske;
 };
 
 #endif // MAINWINDOW_H
