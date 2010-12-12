@@ -7,7 +7,8 @@
 GuitarBoard::GuitarBoard(QObject *parent): QGraphicsScene(parent)
 {
 	// Paint a guitar board
-	// Strings
+    setBackgroundBrush(Qt::white);
+    // Strings
 	for (int i = 0; i < 6; i++)  addLine(-20, stringPosY(i), strLength/2, stringPosY(i));
 	// Bands
 	for (int i = 0; i < 12; i++) addLine(bandPosition(i), 10, bandPosition(i), 140);

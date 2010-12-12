@@ -113,10 +113,10 @@
     <valuelist key="Qt4ProjectManager.MaemoRunConfiguration.Arguments" type="QVariantList"/>
     <value key="Qt4ProjectManager.MaemoRunConfiguration.DeviceId" type="qulonglong">13</value>
     <valuelist key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedFiles" type="QVariantList">
-     <value type="QString">192.168.2.15</value>
+     <value type="QString">/home/christian/build/IntervalTrainerMaemo/intervaltrainer_0.0.1_armel.deb</value>
     </valuelist>
     <valuelist key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedHosts" type="QVariantList">
-     <value type="QString">/home/christian/build/IntervalTrainerMaemo/intervaltrainer_0.0.1_armel.deb</value>
+     <value type="QString">192.168.2.15</value>
     </valuelist>
     <valuelist key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedRemotePaths" type="QVariantList">
      <value type="QString">/home/developer/intervaltrainer_0.0.1_armel.deb</value>
