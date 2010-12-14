@@ -12,7 +12,7 @@ public:
     MidiPlayer();
     ~MidiPlayer();
     void playNote(Note note);
-	void playInterval(int n1, int n2);
+	void playPitch(int n1, int n2);
     int getInstrument();
 
 public slots: 

@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	std::cout.flush();
 	ui->repeatButton->setEnabled(false);
 	ui->giveUpButton->setEnabled(false);
-	connect(ui->newIntervalButton, SIGNAL(clicked()), SLOT(newInterval()));
+	connect(ui->newPitchButton, SIGNAL(clicked()), SLOT(newPitch()));
 	connect(ui->repeatButton, SIGNAL(clicked()), SLOT(repeat()));
     connect(ui->giveUpButton, SIGNAL(clicked()), SLOT(giveUp()));
     connect(ui->settingsButton, SIGNAL(clicked()), SLOT(settings()));
@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(guitarBoard, SIGNAL(guess(Note)), SLOT(guess(Note)));
 }
 
-void MainWindow::newInterval()
+void MainWindow::newPitch()
 {
 	int span = (guitarBoard->max() - guitarBoard->min()) - 20 + 1;
 	note1 = guitarBoard->min() + 10 + rand() % span;
@@ -46,7 +46,7 @@ void MainWindow::newInterval()
     qDebug() << noteName(note1) << "-->" << noteName(note2) << "    " << intervalName(note1, note2);
 	ui->repeatButton->setEnabled(true);
 	ui->giveUpButton->setEnabled(true);
-        midiPlayer.playInterval(note1, note2);
+        midiPlayer.playPitch(note1, note2);
 	answerGiven = false;
 	ui->message->setText("Identify the interval");
 	emit newExcercise(QList<Note>() << note1);
@@ -55,7 +55,7 @@ void MainWindow::newInterval()
 
 void MainWindow::repeat()
 {
-        midiPlayer.playInterval(note1, note2);
+        midiPlayer.playPitch(note1, note2);
 }
 
 void MainWindow::giveUp()

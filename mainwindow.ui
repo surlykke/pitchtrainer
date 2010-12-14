@@ -61,7 +61,7 @@
      <number>20</number>
     </property>
    </widget>
-   <widget class="QPushButton" name="newIntervalButton">
+   <widget class="QPushButton" name="newPitchButton">
     <property name="geometry">
      <rect>
       <x>20</x>

@@ -26,7 +26,7 @@ signals:
 	void answer(QList<Note>& notes);
 
 public slots:
-	void newInterval();
+	void newPitch();
 	void repeat();
 	void giveUp();
     void settings();

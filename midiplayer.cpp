@@ -30,7 +30,7 @@ void MidiPlayer::playNote(Note note)
 	play(QByteArray(reinterpret_cast<const char*>(mididata), sizeof(mididata)));
 }
 
-void MidiPlayer::playInterval(int n1, int n2)
+void MidiPlayer::playPitch(int n1, int n2)
 {
 	unsigned char un1 = (unsigned char) n1;
 	unsigned char un2 = (unsigned char) n2;
@@ -51,22 +51,12 @@ void MidiPlayer::playInterval(int n1, int n2)
 
 void MidiPlayer::play(QByteArray arr)
 {
-	while (process.state() != 0) {
-		process.waitForFinished();
-        }
+        while (process.state() != 0) {
+        process.waitForFinished();
+    }
     process.start("/usr/bin/gst-launch-0.10 playbin uri=fd://0");
     process.write(arr);
     process.closeWriteChannel();
-    // QFile file("/tmp/IntervalTrainerOut.mid");
-//    file.open(QIODevice::WriteOnly);
- //   file.write(arr);
-  //  file.close();
-    //process.start("/usr/bin/gst-launch-0.10 playbin uri=file:///tmp/IntervalTrainerOut.mid");
-
-
-    //process.start("/usr/bin/timidity", QStringList() << "-");
-        // process.write(arr);
-        // process.closeWriteChannel();
 }
 
 int MidiPlayer::getInstrument() {
