@@ -19,7 +19,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui multimedia
 
 TARGET = PitchTrainer
 TEMPLATE = app
@@ -39,3 +39,5 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui \
     settings.ui
+
+LIBS += -L/usr/lib/ -lWildMidi

@@ -63,7 +63,7 @@ void MainWindow::newPitch()
     qDebug() << noteName(note1) << "-->" << noteName(note2) << "    " << intervalName(note1, note2);
 	ui->repeatButton->setEnabled(true);
 	ui->giveUpButton->setEnabled(true);
-        midiPlayer.playPitch(note1, note2);
+        midiPlayer.playInterval(note1, note2);
 	answerGiven = false;
 	ui->message->setText("Identify the interval");
 	emit newExcercise(QList<Note>() << note1);
@@ -72,7 +72,7 @@ void MainWindow::newPitch()
 
 void MainWindow::repeat()
 {
-        midiPlayer.playPitch(note1, note2);
+        midiPlayer.playInterval(note1, note2);
 }
 
 void MainWindow::giveUp()

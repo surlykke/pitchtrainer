@@ -29,16 +29,17 @@ public:
     MidiPlayer();
     ~MidiPlayer();
     void playNote(Note note);
-	void playPitch(int n1, int n2);
+        void playInterval(Note n1, Note n2);
     int getInstrument();
 
 public slots: 
     void setInstrument(int instrument);
 
 private:
-	void play(QByteArray arr);
+    void play(QByteArray arr);
+    void play2(unsigned char* mididata, unsigned long size);
     QProcess process;
-    int instrument;
+    unsigned char instrument;
 };
 
 #endif // MIDIPLAYER_H
