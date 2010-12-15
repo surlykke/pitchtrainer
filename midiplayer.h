@@ -36,8 +36,7 @@ public slots:
     void setInstrument(int instrument);
 
 private:
-    void play(QByteArray arr);
-    void play2(unsigned char* mididata, unsigned long size);
+    void play(unsigned char* mididata, unsigned long size);
     QProcess process;
     unsigned char instrument;
 };

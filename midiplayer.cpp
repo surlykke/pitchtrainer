@@ -50,7 +50,7 @@ void MidiPlayer::playNote(Note note)
                                  0x00, 0xFF, 0x2F, 0x00                          // end of track
                                };
         // play(QByteArray(reinterpret_cast<const char*>(mididata), sizeof(mididata)));
-    play2(mididata, sizeof(mididata));
+    play(mididata, sizeof(mididata));
 }
 
 void MidiPlayer::playInterval(Note n1, Note n2)
@@ -68,20 +68,10 @@ void MidiPlayer::playInterval(Note n1, Note n2)
                                };
 //    play(QByteArray(reinterpret_cast<const char*>(mididata), sizeof(mididata)));
 
-    play2(mididata, sizeof(mididata));
+    play(mididata, sizeof(mididata));
 }
 
-void MidiPlayer::play(QByteArray arr)
-{
-    while (process.state() != 0) {
-        process.waitForFinished();
-    }
-    process.start("/usr/bin/gst-launch-0.10 playbin uri=fd://0");
-    process.write(arr);
-    process.closeWriteChannel();
-}
-
-void MidiPlayer::play2(unsigned char *mididata, unsigned long size) {
+void MidiPlayer::play(unsigned char *mididata, unsigned long size) {
     static char* wav_data = 0;
     static int wav_hdr_size = 0;
     if (wav_data == 0) {
