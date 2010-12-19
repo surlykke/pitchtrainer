@@ -20,6 +20,9 @@
 #include "note.h"
 #include <qprocess.h>
 #include <QObject>
+#include <QAudioOutput>
+#include <QBuffer>
+#include <QByteArray>
 
 class MidiPlayer: public QObject
 {
@@ -29,16 +32,28 @@ public:
     MidiPlayer();
     ~MidiPlayer();
     void playNote(Note note);
-        void playInterval(Note n1, Note n2);
+    void playInterval(Note n1, Note n2);
     int getInstrument();
+
+signals:
+    void donePlaying();
 
 public slots: 
     void setInstrument(int instrument);
+    void pcmPlayed(QAudio::State state);
 
 private:
     void play(unsigned char* mididata, unsigned long size);
-    QProcess process;
-    unsigned char instrument;
+
+    QByteArray midi2pcm(unsigned char *mididata, unsigned long size);
+
+    Instrument instrument;
+
+    QAudioFormat format;
+    QAudioOutput *audioOutput;
+    QBuffer      pcmData;
 };
+
+
 
 #endif // MIDIPLAYER_H

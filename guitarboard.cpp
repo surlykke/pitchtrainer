@@ -20,6 +20,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <math.h>
 #include <Qt>
+#include <QDebug>
 
 GuitarBoard::GuitarBoard(QObject *parent): QGraphicsScene(parent)
 {
@@ -45,7 +46,7 @@ GuitarBoard::GuitarBoard(QObject *parent): QGraphicsScene(parent)
 	addCircleAt(centX, centY, Qt::white);
 	currentNoteCircle = 0;
 	std::cout << "mouseGrabber: " << mouseGrabberItem() << std::endl;
-	connect(&timer, SIGNAL(timeout()), SLOT(guessShown()));
+        connect(&timer, SIGNAL(timeout()), SLOT(donePlaying()));
 }
 
 Note GuitarBoard::min() {
@@ -69,19 +70,22 @@ void GuitarBoard::mousePressEvent(QGraphicsSceneMouseEvent *event) {
 }
 
 void GuitarBoard::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
-	int band = pos2Band(event->lastScenePos());
+    qDebug() << "Ind i mouseReleaseEvent";
+    int band = pos2Band(event->lastScenePos());
 	int string = pos2String(event->lastScenePos());
 	if (band == currentBand && string == currentString) {
-		timer.start(1000);
 		emit guess(note(band, string));
 	}
 	else {
-		guessShown();
-	}
+                removeGuessCircle();
+        }
+    qDebug() << "Ud af mouseReleaseEvent";
 }
 
-void GuitarBoard::guessShown() {
-	removeGuessCircle();
+void GuitarBoard::donePlaying() {
+    qDebug() << "Ind i GuitarBoard::donePlaying";
+    removeGuessCircle();
+    qDebug() << "Ud af Guitarboard::donePlaying";
 }
 
 void GuitarBoard::removeGuessCircle() {
@@ -143,7 +147,7 @@ QGraphicsItem* GuitarBoard::addCircleOnString(int band, int string, QColor color
 		if (band > 12) {
 			band = 12;
 		}
-		x = (bandPosition(band) + bandPosition(band - 1))/2; - circleRadius;
+                x = (bandPosition(band) + bandPosition(band - 1))/2; - circleRadius;
 	}
 	double y = stringPosY(string);
 	return addCircleAt(x, y, color);
@@ -171,7 +175,7 @@ int GuitarBoard::pos2String(QPointF pos) {
 	return round((y - spaceBesideStrings)/spaceBetweenStrings);
 }
 
-int GuitarBoard::looseStringNote(int string) {
+Note GuitarBoard::looseStringNote(int string) {
 	static Note lsn[] = {76, 71, 67, 62, 57, 52};
 	return lsn[string];
 }

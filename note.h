@@ -18,6 +18,7 @@
 #ifndef NOTE_H
 #define NOTE_H
 
-typedef int Note;
+typedef unsigned char Note;
+typedef unsigned char Instrument;
 
 #endif // NOTE_H

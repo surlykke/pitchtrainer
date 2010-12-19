@@ -38,7 +38,7 @@ signals:
 	void guess(Note note);
 
 public slots:
-	void guessShown();
+        void donePlaying();
 	void newExcercise(QList<Note>& notes);
 	void answer(QList<Note>& notes);
 

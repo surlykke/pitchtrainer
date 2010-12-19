@@ -25,78 +25,102 @@
 #include <QFile>
 #include <QBuffer>
 #include <QAudioOutput>
+#include <QStringList>
 
 extern "C" {
 #include "wildmidi_lib.h"
 }
 
-MidiPlayer::MidiPlayer():  QObject(), process() {
+MidiPlayer::MidiPlayer():  QObject(), format() {
     this->instrument = 0;
-    WildMidi_Init("/etc/timidity/timidity.cfg", 44100, 0);
+    WildMidi_Init("/etc/wildmidi/wildmidi.cfg", 44100, 0);
+    format.setCodec("audio/pcm");
+    format.setByteOrder(QAudioFormat::LittleEndian);
+    format.setFrequency(44100);
+    format.setChannels(2);
+    format.setSampleSize(16);
+    format.setSampleType(QAudioFormat::SignedInt);
+    audioOutput = new QAudioOutput(format, this);
 }
 
 MidiPlayer::~MidiPlayer() {
 }
 
-void MidiPlayer::playNote(Note note)
+void MidiPlayer::playNote(Note n)
 {
-    unsigned char mididata[] = { 0x4D, 0x54, 0x68, 0x64, 0x00, 0x00, 0x00, 0x06, // Midi header
-                                 0x00, 0x00, 0x00, 0x01, 0x00, 0x90,             // 1 track, timedivision 144/second
-                                 0x4D, 0x54, 0x72, 0x6B,                         // Track header
-                                 0x00, 0x00, 0x00, 0x0F,                         // 15 bytes of event data
-                                 0x00, 0xc0, instrument,                         // Set instrument
-                                 0x00, 0x90, note, 0xF0,                         // note n on at time
-                                 0x60, 0x80, note, 0x00,                         // note n off at 96/144 beats
-                                 0x00, 0xFF, 0x2F, 0x00                          // end of track
-                               };
-        // play(QByteArray(reinterpret_cast<const char*>(mididata), sizeof(mididata)));
-    play(mididata, sizeof(mididata));
+    unsigned char noteMidi[] =  {
+        0x4D, 0x54, 0x68, 0x64, 0x00, 0x00, 0x00, 0x06, // Midi header
+        0x00, 0x00, 0x00, 0x01, 0x00, 0x90,             // 1 track, timedivision 144/second
+        0x4D, 0x54, 0x72, 0x6B,                         // Track header
+        0x00, 0x00, 0x00, 0x0F,                         // 15 bytes of event data
+        0x00, 0xc0, instrument,                         // Set instrument
+        0x00, 0x90,    n, 0xF0,                         // note on at time 0
+        0x60, 0x80,    n, 0x00,                         // note off at 96/144 beats
+        0x00, 0xFF, 0x2F, 0x00                          // end of track
+    };
+    play(noteMidi, sizeof(noteMidi));
 }
 
 void MidiPlayer::playInterval(Note n1, Note n2)
 {
-    unsigned char mididata[] = { 0x4D, 0x54, 0x68, 0x64, 0x00, 0x00, 0x00, 0x06, // Midi header
-                                 0x00, 0x00, 0x00, 0x01, 0x00, 0x90,             // 1 track, timedivision 144/beat.
-                                 0x4D, 0x54, 0x72, 0x6B,                         // Track header
-                                 0x00, 0x00, 0x00, 0x18,                         // 18 bytes of event data
-                                 0x00, 0xc0, instrument,                         // Set instrument
-                                 0x00, 0x90, n1, 0xF0,                           // note un1 on at time 0
-                                 0x60, 0x80, n1, 0x00,                           // note un1 off at 96/144 beats
-                                 0x60, 0x90, n2, 0xF0,                           // note un2 on at 96/144 beats
-                                 0x81, 0x40, 0x80, n2, 0x00,                     // note un2 off at 192/144 beats
-                                 0x00, 0xFF, 0x2F, 0x00                          // end of track
-                               };
-//    play(QByteArray(reinterpret_cast<const char*>(mididata), sizeof(mididata)));
 
-    play(mididata, sizeof(mididata));
+    unsigned char intervalMidi[] = {
+        0x4D, 0x54, 0x68, 0x64, 0x00, 0x00, 0x00, 0x06, // Midi header
+        0x00, 0x00, 0x00, 0x01, 0x00, 0x90,             // 1 track, timedivision 144/beat.
+        0x4D, 0x54, 0x72, 0x6B,                         // Track header
+        0x00, 0x00, 0x00, 0x18,                         // 18 bytes of event data
+        0x00, 0xc0, instrument,                         // Set instrument
+        0x00, 0x90,   n1, 0xF0,                         // First note on at time 0
+        0x60, 0x80,   n1, 0x00,                         // First note off at 96/144 beats
+        0x60, 0x90,   n2, 0xF0,                         // Second note on at 96/144 beats
+        0x81, 0x40, 0x80,   n2, 0x00,                   // Second note off at 192/144 beats
+        0x00, 0xFF, 0x2F, 0x00                          // end of track
+    };
+
+    play(intervalMidi, sizeof(intervalMidi));
+}
+
+QByteArray MidiPlayer::midi2pcm(unsigned char *mididata, unsigned long size) {
+    qDebug() << "Ind i midi2pcm...";
+    unsigned char* mididataCopy = (unsigned char*) malloc(size);  // WildMidi insists on freeing the memory used to hold mididata
+    memcpy(mididataCopy, mididata, size);                         // on close, so we have to make a copy of mididata
+
+    QByteArray result;
+    midi* midiPtr = WildMidi_OpenBuffer(mididataCopy, size);
+    char buf[1024];
+    int outputsize;
+    while ((outputsize = WildMidi_GetOutput(midiPtr, buf, 1024)) > 0) {
+        qDebug() << "overfører: " << outputsize;
+        result.append(buf, outputsize);
+    }
+    WildMidi_Close(midiPtr);
+    qDebug() << result.size();
+    return result;
 }
 
 void MidiPlayer::play(unsigned char *mididata, unsigned long size) {
-    static char* wav_data = 0;
-    static int wav_hdr_size = 0;
-    if (wav_data == 0) {
-        wav_data = (char*) malloc(250000);
-        const char wav_hdr[] = { 0x52, 0x49, 0x46, 0x46, 0x00, 0x00, 0x00, 0x00,
-                                 0x57, 0x41, 0x56, 0x45, 0x66, 0x6D, 0x74, 0x20,
-                                 0x10, 0x00, 0x00, 0x00, 0x01, 0x00, 0x02, 0x00,
-                                 0x44, 0xAC, 0x00, 0x00, 0x10, 0xB1, 0x02, 0x00,
-                                 0x04, 0x00, 0x10, 0x00, 0x64, 0x61, 0x74, 0x61,
-                                 0x00, 0x00, 0x00, 0x00 };
-        wav_hdr_size = sizeof(wav_hdr);
-        memcpy(wav_data, wav_hdr, wav_hdr_size);
-    }
+    qDebug() << "Ind i play";
+    if (audioOutput->state() == QAudio::ActiveState) return;
+    pcmData.setData(midi2pcm(mididata, size));
+    pcmData.open(QIODevice::ReadOnly);
+    audioOutput->start(&pcmData);
+    connect(audioOutput,SIGNAL(stateChanged(QAudio::State)),SLOT(pcmPlayed(QAudio::State)));
+    qDebug() << "Ud af play";
+ }
 
-    midi* midiPtr = WildMidi_OpenBuffer(mididata, size);
-    int outputsize = WildMidi_GetOutput(midiPtr, wav_data + wav_hdr_size, 250000 - wav_hdr_size) + wav_hdr_size;
-    qDebug() << "outputsize: " << outputsize;
-
-    process.start("/usr/bin/gst-launch-0.10 playbin uri=fd://0");
-    process.write(wav_data, outputsize);
-    process.closeWriteChannel();
+void MidiPlayer::pcmPlayed(QAudio::State state) {
+      if(state == QAudio::IdleState) {
+            qDebug() << audioOutput->error() ;
+          qDebug() << "Idle..";
+          emit donePlaying();
+          pcmData.close();
+          qDebug() << "donePlaying() emitted...";
+     }
 }
 
+
 int MidiPlayer::getInstrument() {
-    return instrument;
+    return 7;//noteMidi[24];
 }
 
 void MidiPlayer::setInstrument(int instrument) {

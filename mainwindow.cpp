@@ -49,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(this, SIGNAL(newExcercise(QList<Note>&)), guitarBoard, SLOT(newExcercise(QList<Note>&)));
 	connect(this, SIGNAL(answer(QList<Note>&)), guitarBoard, SLOT(answer(QList<Note>&)));
 	connect(guitarBoard, SIGNAL(guess(Note)), SLOT(guess(Note)));
+    connect(&midiPlayer, SIGNAL(donePlaying()), guitarBoard, SLOT(donePlaying()));
 }
 
 void MainWindow::newPitch()
@@ -98,11 +99,11 @@ void MainWindow::settings()
 
 void MainWindow::guess(Note note)
 {
-	if (answerGiven) {
+    qDebug() << "Ind i guess";
+    if (answerGiven) {
 		return;
 	}
-	std::cout << "Ind i guess" << std::endl;
-        midiPlayer.playNote(note);
+    midiPlayer.playNote(note);
 	if (note == note2)
 	{
                 ui->message->setText(QString("Correct!  %1 -> %2   %3").arg(noteName(note1)).arg(noteName(note2)).arg(intervalName(note1, note2)));
@@ -113,7 +114,8 @@ void MainWindow::guess(Note note)
 	else
 	{
 		ui->message->setText("Wrong!");
-	}
+        }
+    qDebug() << "Ud af guess";
 }
 
 void MainWindow::instrumentChanged(int newInstrument) {
