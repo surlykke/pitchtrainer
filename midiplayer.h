@@ -23,23 +23,22 @@
 #include <QAudioOutput>
 #include <QBuffer>
 #include <QByteArray>
+#include "settings.h"
 
 class MidiPlayer: public QObject
 {
     Q_OBJECT
 
 public:
-    MidiPlayer();
+    MidiPlayer(Settings *settings);
     ~MidiPlayer();
     void playNote(Note note);
     void playInterval(Note n1, Note n2);
-    int getInstrument();
 
 signals:
     void donePlaying();
 
 public slots: 
-    void setInstrument(int instrument);
     void pcmPlayed(QAudio::State state);
 
 private:
@@ -47,8 +46,7 @@ private:
 
     QByteArray midi2pcm(unsigned char *mididata, unsigned long size);
 
-    Instrument instrument;
-
+    Settings *settings;
     QAudioFormat format;
     QAudioOutput *audioOutput;
     QBuffer      pcmData;

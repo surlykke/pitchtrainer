@@ -26,18 +26,20 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    guitarboard.cpp \
-    midiplayer.cpp \
-    settings.cpp
+           mainwindow.cpp \
+           guitarboard.cpp \
+           midiplayer.cpp \
+           settings_dialog.cpp \
+           settings.cpp
 
 HEADERS  += mainwindow.h \
-    guitarboard.h \
-    midiplayer.h \
-    note.h \
-    settings.h
+            guitarboard.h \
+            midiplayer.h \
+            note.h \
+            settings_dialog.h \
+            settings.h
 
 FORMS    += mainwindow.ui \
-    settings.ui
+            settings_dialog.ui
 
 LIBS += -L/usr/lib/ -lWildMidi

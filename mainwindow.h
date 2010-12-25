@@ -24,6 +24,7 @@
 #include "midiplayer.h"
 #include <QString>
 #include <QSettings>
+#include "settings.h"
 
 namespace Ui {
     class MainWindow;
@@ -35,7 +36,7 @@ class MainWindow : public QMainWindow
 
 public:
 
-	explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
 signals:
@@ -46,21 +47,20 @@ public slots:
 	void newPitch();
 	void repeat();
 	void giveUp();
-    void settings();
-    void guess(Note note);
-    void instrumentChanged(int newInstrument);
+        void editSettings();
+        void guess(Note note);
 
 private:
 	Ui::MainWindow *ui;
-	GuitarBoard *guitarBoard;
-	Note note1, note2;
-	MidiPlayer midiPlayer;
-	bool answerGiven;
+        Settings* settings;
+        GuitarBoard *guitarBoard;
+        MidiPlayer *midiPlayer;
+        Note note1, note2;
+        bool answerGiven;
 
     // Utils
     QString intervalName(Note note1, Note note2);
     QString noteName(Note n);
-    QSettings *huske;
 };
 
 #endif // MAINWINDOW_H

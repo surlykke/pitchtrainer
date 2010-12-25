@@ -15,19 +15,36 @@
   You should have received a copy of the GNU General Public License
   along with PitchTrainer.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <QtGui/QApplication>
-#include <QCoreApplication>
-#include "mainwindow.h"
+#ifndef SETTINGS_DIALOG_H
+#define SETTINGS_DIALOG_H
 
-int main(int argc, char *argv[])
-{
-    QCoreApplication::setOrganizationName("Surlykke IT");
-    QCoreApplication::setOrganizationDomain("surlykke-it.dk");
-    QCoreApplication::setApplicationName("Pitch Trainer");
+#include <QDialog>
+#include <QList>
+#include <QCheckBox>
+#include "midiplayer.h"
+#include <QButtonGroup>
 
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-
-    return a.exec();
+namespace Ui {
+    class SettingsDialog;
 }
+
+class SettingsDialog : public QDialog
+{
+    Q_OBJECT
+
+public:
+    SettingsDialog(Instrument instrument, int excercise, QList<bool> intervals, QWidget *parent = 0);
+    ~SettingsDialog();
+    Ui::SettingsDialog *ui;
+    QButtonGroup intervalButtons;
+
+signals:
+    void intervalAddedOrRemoved(int interval, bool added);
+
+public slots:
+    void checkboxClicked(int checkboxnr);
+    void backButtonClicked();
+
+};
+
+#endif // SETTINGS_DIALOG_H
