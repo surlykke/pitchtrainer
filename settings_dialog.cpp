@@ -25,36 +25,17 @@ SettingsDialog::SettingsDialog(Instrument instrument, int excercise, QList<bool>
     ui(new Ui::SettingsDialog)
 { 
     ui->setupUi(this);
-    intervalButtons.setExclusive(false);
-    intervalButtons.addButton(ui->interval0, 0);
-    intervalButtons.addButton(ui->interval1, 1);
-    intervalButtons.addButton(ui->interval2, 2);
-    intervalButtons.addButton(ui->interval3, 3);
-    intervalButtons.addButton(ui->interval4, 4);
-    intervalButtons.addButton(ui->interval5, 5);
-    intervalButtons.addButton(ui->interval6, 6);
-    intervalButtons.addButton(ui->interval7, 7);
-    intervalButtons.addButton(ui->interval8, 8);
-    intervalButtons.addButton(ui->interval9, 9);
-    intervalButtons.addButton(ui->interval10, 10);
-    intervalButtons.addButton(ui->interval11, 11);
-    intervalButtons.addButton(ui->interval12, 12);
 
     ui->instrumentBox->setCurrentIndex(instrument);
     ui->excerciseBox->setCurrentIndex(excercise);
-    qDebug() << "I settingsdialog construktor, intervals er: " << intervals;
-    for (int interval = 0; interval < 13; interval++) {
-        qDebug() << "Sætter knap " << interval << " til " << intervals[interval];
-        intervalButtons.button(interval)->setChecked(intervals[interval]);
+    for (int i = 0; i < 13; i++) {
+        ui->intervalList->addItem(QString("%1").arg(i));
     }
+    ui->intervalList->setSelectionMode(QAbstractItemView::MultiSelection);
 
-    connect(&intervalButtons, SIGNAL(buttonClicked(int)), this, SLOT(checkboxClicked(int)));
     connect(ui->backButton, SIGNAL(clicked()), this, SLOT(backButtonClicked()));
 }
 
-void SettingsDialog::checkboxClicked(int checkboxnr) {
-    emit intervalAddedOrRemoved(checkboxnr, intervalButtons.button(checkboxnr)->isChecked());
-}
 
 
 SettingsDialog::~SettingsDialog()

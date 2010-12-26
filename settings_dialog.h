@@ -36,13 +36,8 @@ public:
     SettingsDialog(Instrument instrument, int excercise, QList<bool> intervals, QWidget *parent = 0);
     ~SettingsDialog();
     Ui::SettingsDialog *ui;
-    QButtonGroup intervalButtons;
-
-signals:
-    void intervalAddedOrRemoved(int interval, bool added);
 
 public slots:
-    void checkboxClicked(int checkboxnr);
     void backButtonClicked();
 
 };
