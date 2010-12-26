@@ -64,404 +64,404 @@
     </font>
    </property>
    <item>
-     <property name="text">
-       <string>Acoustic Grand Piano</string>
-     </property>
+    <property name="text">
+     <string>Acoustic Grand Piano</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Bright Acoustic Piano</string>
-     </property>
+    <property name="text">
+     <string>Bright Acoustic Piano</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Electric Grand Piano</string>
-     </property>
+    <property name="text">
+     <string>Electric Grand Piano</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Honky-tonk Piano</string>
-     </property>
+    <property name="text">
+     <string>Honky-tonk Piano</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Electric Piano 1</string>
-     </property>
+    <property name="text">
+     <string>Electric Piano 1</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Electric Piano 2</string>
-     </property>
+    <property name="text">
+     <string>Electric Piano 2</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Harpsichord</string>
-     </property>
+    <property name="text">
+     <string>Harpsichord</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Clavinet</string>
-     </property>
+    <property name="text">
+     <string>Clavinet</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Celesta</string>
-     </property>
+    <property name="text">
+     <string>Celesta</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Glockenspiel</string>
-     </property>
+    <property name="text">
+     <string>Glockenspiel</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Music Box</string>
-     </property>
+    <property name="text">
+     <string>Music Box</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Vibraphone</string>
-     </property>
+    <property name="text">
+     <string>Vibraphone</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Marimba</string>
-     </property>
+    <property name="text">
+     <string>Marimba</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Xylophone</string>
-     </property>
+    <property name="text">
+     <string>Xylophone</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Tubular Bells</string>
-     </property>
+    <property name="text">
+     <string>Tubular Bells</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Dulcimer</string>
-     </property>
+    <property name="text">
+     <string>Dulcimer</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Drawbar Organ</string>
-     </property>
+    <property name="text">
+     <string>Drawbar Organ</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Percussive Organ</string>
-     </property>
+    <property name="text">
+     <string>Percussive Organ</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Rock Organ</string>
-     </property>
+    <property name="text">
+     <string>Rock Organ</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Church Organ</string>
-     </property>
+    <property name="text">
+     <string>Church Organ</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Reed Organ</string>
-     </property>
+    <property name="text">
+     <string>Reed Organ</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Accordion</string>
-     </property>
+    <property name="text">
+     <string>Accordion</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Harmonica</string>
-     </property>
+    <property name="text">
+     <string>Harmonica</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Tango Accordion</string>
-     </property>
+    <property name="text">
+     <string>Tango Accordion</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Acoustic Guitar (nylon)</string>
-     </property>
+    <property name="text">
+     <string>Acoustic Guitar (nylon)</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Acoustic Guitar (steel)</string>
-     </property>
+    <property name="text">
+     <string>Acoustic Guitar (steel)</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Electric Guitar (jazz)</string>
-     </property>
+    <property name="text">
+     <string>Electric Guitar (jazz)</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Electric Guitar (clean)</string>
-     </property>
+    <property name="text">
+     <string>Electric Guitar (clean)</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Electric Guitar (muted)</string>
-     </property>
+    <property name="text">
+     <string>Electric Guitar (muted)</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Overdriven Guitar</string>
-     </property>
+    <property name="text">
+     <string>Overdriven Guitar</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Distortion Guitar</string>
-     </property>
+    <property name="text">
+     <string>Distortion Guitar</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Guitar Harmonics</string>
-     </property>
+    <property name="text">
+     <string>Guitar Harmonics</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Acoustic Bass</string>
-     </property>
+    <property name="text">
+     <string>Acoustic Bass</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Electric Bass (finger)</string>
-     </property>
+    <property name="text">
+     <string>Electric Bass (finger)</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Electric Bass (pick)</string>
-     </property>
+    <property name="text">
+     <string>Electric Bass (pick)</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Fretless Bass</string>
-     </property>
+    <property name="text">
+     <string>Fretless Bass</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Slap Bass 1</string>
-     </property>
+    <property name="text">
+     <string>Slap Bass 1</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Slap Bass 2</string>
-     </property>
+    <property name="text">
+     <string>Slap Bass 2</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Synth Bass 1</string>
-     </property>
+    <property name="text">
+     <string>Synth Bass 1</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Synth Bass 2</string>
-     </property>
+    <property name="text">
+     <string>Synth Bass 2</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Violin</string>
-     </property>
+    <property name="text">
+     <string>Violin</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Viola</string>
-     </property>
+    <property name="text">
+     <string>Viola</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Cello</string>
-     </property>
+    <property name="text">
+     <string>Cello</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Contrabass</string>
-     </property>
+    <property name="text">
+     <string>Contrabass</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Tremolo Strings</string>
-     </property>
+    <property name="text">
+     <string>Tremolo Strings</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Pizzicato Strings</string>
-     </property>
+    <property name="text">
+     <string>Pizzicato Strings</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Orchestral Harp</string>
-     </property>
+    <property name="text">
+     <string>Orchestral Harp</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Timpani</string>
-     </property>
+    <property name="text">
+     <string>Timpani</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>String Ensemble 1</string>
-     </property>
+    <property name="text">
+     <string>String Ensemble 1</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>String Ensemble 2</string>
-     </property>
+    <property name="text">
+     <string>String Ensemble 2</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Synth Strings 1</string>
-     </property>
+    <property name="text">
+     <string>Synth Strings 1</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Synth Strings 2</string>
-     </property>
+    <property name="text">
+     <string>Synth Strings 2</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Choir Aahs</string>
-     </property>
+    <property name="text">
+     <string>Choir Aahs</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Voice Oohs</string>
-     </property>
+    <property name="text">
+     <string>Voice Oohs</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Synth Choir</string>
-     </property>
+    <property name="text">
+     <string>Synth Choir</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Orchestra Hit</string>
-     </property>
+    <property name="text">
+     <string>Orchestra Hit</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Trumpet</string>
-     </property>
+    <property name="text">
+     <string>Trumpet</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Trombone</string>
-     </property>
+    <property name="text">
+     <string>Trombone</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Tuba</string>
-     </property>
+    <property name="text">
+     <string>Tuba</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Muted Trumpet</string>
-     </property>
+    <property name="text">
+     <string>Muted Trumpet</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>French Horn</string>
-     </property>
+    <property name="text">
+     <string>French Horn</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Brass Section</string>
-     </property>
+    <property name="text">
+     <string>Brass Section</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Synth Brass 1</string>
-     </property>
+    <property name="text">
+     <string>Synth Brass 1</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Synth Brass 2</string>
-     </property>
+    <property name="text">
+     <string>Synth Brass 2</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Soprano Sax</string>
-     </property>
+    <property name="text">
+     <string>Soprano Sax</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Alto Sax</string>
-     </property>
+    <property name="text">
+     <string>Alto Sax</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Tenor Sax</string>
-     </property>
+    <property name="text">
+     <string>Tenor Sax</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Baritone Sax</string>
-     </property>
+    <property name="text">
+     <string>Baritone Sax</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Oboe</string>
-     </property>
+    <property name="text">
+     <string>Oboe</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>English Horn</string>
-     </property>
+    <property name="text">
+     <string>English Horn</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Bassoon</string>
-     </property>
+    <property name="text">
+     <string>Bassoon</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Clarinet</string>
-     </property>
+    <property name="text">
+     <string>Clarinet</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Piccolo</string>
-     </property>
+    <property name="text">
+     <string>Piccolo</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Flute</string>
-     </property>
+    <property name="text">
+     <string>Flute</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Recorder</string>
-     </property>
+    <property name="text">
+     <string>Recorder</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Pan Flute</string>
-     </property>
+    <property name="text">
+     <string>Pan Flute</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Blown Bottle</string>
-     </property>
+    <property name="text">
+     <string>Blown Bottle</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Shakuhachi</string>
-     </property>
+    <property name="text">
+     <string>Shakuhachi</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Whistle</string>
-     </property>
+    <property name="text">
+     <string>Whistle</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Ocarina</string>
-     </property>
+    <property name="text">
+     <string>Ocarina</string>
+    </property>
    </item>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -515,123 +515,30 @@
     </font>
    </property>
    <item>
-     <property name="text">
-       <string>Melodic intervals</string>
-     </property>
+    <property name="text">
+     <string>Melodic intervals</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Descending melodic intervals</string>
-     </property>
+    <property name="text">
+     <string>Descending melodic intervals</string>
+    </property>
    </item>
    <item>
-     <property name="text">
-       <string>Ascending melodic intervals</string>
-     </property>
+    <property name="text">
+     <string>Ascending melodic intervals</string>
+    </property>
    </item>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QListWidget" name="intervalList">
    <property name="geometry">
     <rect>
      <x>200</x>
      <y>170</y>
-     <width>634</width>
-     <height>114</height>
+     <width>371</width>
+     <height>192</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QCheckBox" name="interval0">
-      <property name="text">
-       <string>Perfect unison</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QCheckBox" name="interval1">
-      <property name="text">
-       <string>Minor second</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="2">
-     <widget class="QCheckBox" name="interval2">
-      <property name="text">
-       <string>Major second</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="3">
-     <widget class="QCheckBox" name="interval3">
-      <property name="text">
-       <string>Minor third</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QCheckBox" name="interval4">
-      <property name="text">
-       <string>Major third</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QCheckBox" name="interval5">
-      <property name="text">
-       <string>Perfect fourth</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="2">
-     <widget class="QCheckBox" name="interval6">
-      <property name="text">
-       <string>Diminished fifth</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="3">
-     <widget class="QCheckBox" name="interval7">
-      <property name="text">
-       <string>Perfect fifth</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QCheckBox" name="interval8">
-      <property name="text">
-       <string>Minor sixth</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QCheckBox" name="interval9">
-      <property name="text">
-       <string>Major sixth</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="2">
-     <widget class="QCheckBox" name="interval10">
-      <property name="text">
-       <string>Minor seventh</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="3">
-     <widget class="QCheckBox" name="interval11">
-      <property name="text">
-       <string>Major seventh</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QCheckBox" name="interval12">
-      <property name="text">
-       <string>Perfect Octave</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
   </widget>
  </widget>
  <resources/>
