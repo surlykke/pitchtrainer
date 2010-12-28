@@ -12,13 +12,13 @@ public:
     explicit Settings(QObject *parent = 0);
 
     Instrument getInstrument();
-    int getExcercise();
-    QList<bool> getIntervals();
+    void setInstrument(Instrument instrument);
 
-public slots:
-    void instrumentChanged(int newInstrument);
-    void excerciseChanged(int newExcercise);
-    void intervalChanged(int interval, bool enabled);
+    int getExcercise();
+    void setExcercise(int excercise);
+
+    QList<bool> getIntervals();
+    void setIntervals(QList<bool> intervals);
 
 private:
     QList<QVariant> getIntervals_helper();

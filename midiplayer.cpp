@@ -76,10 +76,6 @@ void MidiPlayer::playInterval(Note n1, Note n2)
         0x00, 0xFF, 0x2F, 0x00                          // end of track
     };
 
-    for (int i = 0; i < sizeof(intervalMidi); i++) {
-        qDebug(" %0x", intervalMidi[i]);
-    }
-    qDebug();
     play(intervalMidi, sizeof(intervalMidi));
 }
 

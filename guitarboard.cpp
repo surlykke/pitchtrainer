@@ -45,7 +45,6 @@ GuitarBoard::GuitarBoard(QObject *parent): QGraphicsScene(parent)
 	centY = (stringPosY(4) + stringPosY(3))/2;
 	addCircleAt(centX, centY, Qt::white);
 	currentNoteCircle = 0;
-	std::cout << "mouseGrabber: " << mouseGrabberItem() << std::endl;
         connect(&timer, SIGNAL(timeout()), SLOT(donePlaying()));
 }
 
@@ -70,7 +69,6 @@ void GuitarBoard::mousePressEvent(QGraphicsSceneMouseEvent *event) {
 }
 
 void GuitarBoard::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
-    qDebug() << "Ind i mouseReleaseEvent";
     int band = pos2Band(event->lastScenePos());
 	int string = pos2String(event->lastScenePos());
 	if (band == currentBand && string == currentString) {
@@ -79,13 +77,10 @@ void GuitarBoard::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
 	else {
                 removeGuessCircle();
         }
-    qDebug() << "Ud af mouseReleaseEvent";
 }
 
 void GuitarBoard::donePlaying() {
-    qDebug() << "Ind i GuitarBoard::donePlaying";
     removeGuessCircle();
-    qDebug() << "Ud af Guitarboard::donePlaying";
 }
 
 void GuitarBoard::removeGuessCircle() {
