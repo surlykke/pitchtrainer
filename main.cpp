@@ -18,6 +18,7 @@
 #include <QtGui/QApplication>
 #include <QCoreApplication>
 #include "mainwindow.h"
+#include <time.h>
 
 int main(int argc, char *argv[])
 {
@@ -29,5 +30,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
+    unsigned int seed = time(0);
+    srand(seed);
     return a.exec();
 }

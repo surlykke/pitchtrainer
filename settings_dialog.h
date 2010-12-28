@@ -33,12 +33,16 @@ class SettingsDialog : public QDialog
     Q_OBJECT
 
 public:
-    SettingsDialog(Instrument instrument, int excercise, QList<bool> intervals, QWidget *parent = 0);
+    SettingsDialog(Settings *settings, QWidget *parent = 0);
     ~SettingsDialog();
     Ui::SettingsDialog *ui;
 
-public slots:
-    void backButtonClicked();
+private:
+    Settings *settings;
+
+private slots:
+    void okButtonClicked();
+    void cancelButtonClicked();
 
 };
 

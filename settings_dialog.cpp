@@ -20,20 +20,20 @@
 #include "settings.h"
 #include <QDebug>
 
-SettingsDialog::SettingsDialog(Instrument instrument, int excercise, QList<bool> intervals, QWidget *parent) :
+SettingsDialog::SettingsDialog(Settings *settings, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SettingsDialog)
 { 
     ui->setupUi(this);
-
-    ui->instrumentBox->setCurrentIndex(instrument);
-    ui->excerciseBox->setCurrentIndex(excercise);
+    this->settings = settings;
+    ui->instrumentBox->setCurrentIndex(settings->getInstrument());
+    ui->excerciseBox->setCurrentIndex(settings->getExcercise());
+    QList<bool> intervals = settings->getIntervals();
     for (int i = 0; i < 13; i++) {
-        ui->intervalList->addItem(QString("%1").arg(i));
+        ui->intervalList->item(i)->setCheckState(intervals[i] ? Qt::Checked : Qt::Unchecked);
     }
-    ui->intervalList->setSelectionMode(QAbstractItemView::MultiSelection);
-
-    connect(ui->backButton, SIGNAL(clicked()), this, SLOT(backButtonClicked()));
+    connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(cancelButtonClicked()));
+    connect(ui->okButton, SIGNAL(clicked()), this, SLOT(okButtonClicked()));
 }
 
 
@@ -43,6 +43,17 @@ SettingsDialog::~SettingsDialog()
     delete ui;
 }
 
-void SettingsDialog::backButtonClicked() {
+void SettingsDialog::okButtonClicked() {
+    settings->setInstrument(ui->instrumentBox->currentIndex());
+    settings->setExcercise(ui->excerciseBox->currentIndex());
+    QList<bool> intervals;
+    for (int i = 0; i < 13; i++) {
+        intervals << (ui->intervalList->item(i)->checkState() == Qt::Checked);
+    }
+    settings->setIntervals(intervals);
+    done(0);
+}
+
+void SettingsDialog::cancelButtonClicked() {
     done(0);
 }

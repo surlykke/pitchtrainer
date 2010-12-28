@@ -13,11 +13,11 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="backButton">
+  <widget class="QPushButton" name="okButton">
    <property name="geometry">
     <rect>
-     <x>590</x>
-     <y>310</y>
+     <x>580</x>
+     <y>290</y>
      <width>180</width>
      <height>70</height>
     </rect>
@@ -28,7 +28,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Back</string>
+    <string>Ok</string>
    </property>
   </widget>
   <widget class="QLabel" name="label">
@@ -54,7 +54,7 @@
     <rect>
      <x>200</x>
      <y>10</y>
-     <width>391</width>
+     <width>360</width>
      <height>60</height>
     </rect>
    </property>
@@ -505,7 +505,7 @@
     <rect>
      <x>200</x>
      <y>90</y>
-     <width>391</width>
+     <width>360</width>
      <height>60</height>
     </rect>
    </property>
@@ -535,9 +535,131 @@
     <rect>
      <x>200</x>
      <y>170</y>
-     <width>371</width>
+     <width>360</width>
      <height>192</height>
     </rect>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::NoSelection</enum>
+   </property>
+   <item>
+    <property name="text">
+     <string>Perfect unison</string>
+    </property>
+    <property name="checkState">
+     <enum>Checked</enum>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Minor second</string>
+    </property>
+    <property name="checkState">
+     <enum>Checked</enum>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Major second</string>
+    </property>
+    <property name="checkState">
+     <enum>Checked</enum>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Minor third</string>
+    </property>
+    <property name="checkState">
+     <enum>Checked</enum>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Major third</string>
+    </property>
+    <property name="checkState">
+     <enum>Checked</enum>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Perfect fourth</string>
+    </property>
+    <property name="checkState">
+     <enum>Checked</enum>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Diminished fifth</string>
+    </property>
+    <property name="checkState">
+     <enum>Checked</enum>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Perfect fifth</string>
+    </property>
+    <property name="checkState">
+     <enum>Checked</enum>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Minor sixth</string>
+    </property>
+    <property name="checkState">
+     <enum>Checked</enum>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Major sixth</string>
+    </property>
+    <property name="checkState">
+     <enum>Checked</enum>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Minor seventh</string>
+    </property>
+    <property name="checkState">
+     <enum>Checked</enum>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Major seventh</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Perfect octave</string>
+    </property>
+    <property name="checkState">
+     <enum>Checked</enum>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="cancelButton">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>203</y>
+     <width>180</width>
+     <height>70</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
    </property>
   </widget>
  </widget>
