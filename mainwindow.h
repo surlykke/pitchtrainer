@@ -41,7 +41,8 @@ public:
 
 signals:
 	void newExcercise(QList<Note>& notes);
-	void answer(QList<Note>& notes);
+	void answerFound(QList<Note>& notes);
+        void gaveUp(QList<Note>& notes);
 
 public slots:
 	void newPitch();

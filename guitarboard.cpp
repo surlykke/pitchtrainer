@@ -21,8 +21,13 @@
 #include <math.h>
 #include <Qt>
 #include <QDebug>
+#include <QImageWriter>
 
-GuitarBoard::GuitarBoard(QObject *parent): QGraphicsScene(parent)
+GuitarBoard::GuitarBoard(QObject *parent): QGraphicsScene(parent),
+               green_circle_smiley(":images/green_circle_smiley.png"),
+               green_circle(":images/green_circle.png"),
+               red_circle(":images/red_circle.png"),
+               white_circle(":images/white_circle.png")
 {
 	// Paint a guitar board
     setBackgroundBrush(Qt::white);
@@ -35,15 +40,15 @@ GuitarBoard::GuitarBoard(QObject *parent): QGraphicsScene(parent)
 	int circlebands[] = {3, 5, 7, 9};
 	for (int i = 0; i < 4; i++) {
 		double centerX = (bandPosition(circlebands[i]) + bandPosition(circlebands[i] - 1))/2;
-		addCircleAt(centerX, 75, Qt::white);
+                addImageAt(centerX, 75, white_circle);
 	}
 
 	// Two circlemarks between band 11 and 12
 	double centX = (bandPosition(12) + bandPosition(11))/2;
 	double centY = (stringPosY(2) + stringPosY(1))/2;
-	addCircleAt(centX, centY, Qt::white);
+        addImageAt(centX, centY, white_circle);
 	centY = (stringPosY(4) + stringPosY(3))/2;
-	addCircleAt(centX, centY, Qt::white);
+        addImageAt(centX, centY, white_circle);
 	currentNoteCircle = 0;
         connect(&timer, SIGNAL(timeout()), SLOT(donePlaying()));
 }
@@ -65,7 +70,7 @@ void GuitarBoard::mousePressEvent(QGraphicsSceneMouseEvent *event) {
 		delete currentNoteCircle;
 		currentNoteCircle = 0;
 	}
-	currentNoteCircle = addCircleOnString(band, string, Qt::darkRed);
+        currentNoteCircle = addImageOnString(band, string, green_circle);
 }
 
 void GuitarBoard::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
@@ -96,10 +101,13 @@ void GuitarBoard::newExcercise(QList<Note>& notes) {
 	showNotes(notes, false);
 }
 
-void GuitarBoard::answer(QList<Note>& notes) {
+void GuitarBoard::answerFound(QList<Note>& notes) {
 	showNotes(notes, true);
 }
 
+void GuitarBoard::gaveUp(QList<Note>& notes) {
+    showNotes(notes, false);
+}
 
 void GuitarBoard::showNotes(QList<Note> &notes, bool answer) {
 	QList<Note>::Iterator iterator;
@@ -108,8 +116,8 @@ void GuitarBoard::showNotes(QList<Note> &notes, bool answer) {
 		for (int string = 0; string < 6; string++) {
 			int band = note - looseStringNote(string);
 			if (0 <= band && band < 13) {
-				tmpCircles.push_back(addCircleOnString(band, string, answer ? Qt::darkRed : Qt::darkGreen));
-			}
+                            tmpCircles.push_back(addImageOnString(band, string, answer ? green_circle_smiley : green_circle));
+                        }
 		}
 	}
 }
@@ -124,28 +132,28 @@ void GuitarBoard::clearNotes() {
 }
 
 
-QGraphicsItem* GuitarBoard::addCircleAt(double centX, double centY, QColor color) {
-	QGraphicsEllipseItem* result = new QGraphicsEllipseItem(centX - circleRadius, centY - circleRadius, 2*circleRadius, 2*circleRadius);
-	QBrush brush(Qt::SolidPattern);
-	brush.setColor(color);
-	result->setBrush(brush);
-	addItem(result);
-	return result;
+QGraphicsItem* GuitarBoard::addImageAt(double centX, double centY, QImage& image) {
+    QPixmap pixmap;
+    pixmap.convertFromImage(image);
+    QGraphicsPixmapItem *item = new QGraphicsPixmapItem(pixmap);
+    item->setOffset(centX - image.width()/2, centY - image.height()/2);
+    addItem(item);
+    return item;
 }
 
-QGraphicsItem* GuitarBoard::addCircleOnString(int band, int string, QColor color) {
+QGraphicsItem* GuitarBoard::addImageOnString(int band, int string, QImage& image) {
 	double x;
 	if (band <= 0) {
-		x = - circleRadius - 3;
+                x = - image.width()/2 - 3;
 	}
 	else {
 		if (band > 12) {
 			band = 12;
 		}
-                x = (bandPosition(band) + bandPosition(band - 1))/2; - circleRadius;
+                x = (bandPosition(band) + bandPosition(band - 1))/2; - image.width()/2;
 	}
 	double y = stringPosY(string);
-	return addCircleAt(x, y, color);
+        return addImageAt(x, y, image);
 }
 
 double GuitarBoard::stringPosY(int n) {

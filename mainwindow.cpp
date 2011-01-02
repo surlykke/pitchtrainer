@@ -43,7 +43,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->giveUpButton, SIGNAL(clicked()), SLOT(giveUp()));
     connect(ui->settingsButton, SIGNAL(clicked()), SLOT(editSettings()));
     connect(this, SIGNAL(newExcercise(QList<Note>&)), guitarBoard, SLOT(newExcercise(QList<Note>&)));
-    connect(this, SIGNAL(answer(QList<Note>&)), guitarBoard, SLOT(answer(QList<Note>&)));
+    connect(this, SIGNAL(answerFound(QList<Note>&)), guitarBoard, SLOT(answerFound(QList<Note>&)));
+    connect(this, SIGNAL(gaveUp(QList<Note>&)), guitarBoard, SLOT(gaveUp(QList<Note>&)));
     connect(guitarBoard, SIGNAL(guess(Note)), SLOT(guess(Note)));
     connect(midiPlayer, SIGNAL(donePlaying()), guitarBoard, SLOT(donePlaying()));
 }
@@ -95,7 +96,7 @@ void MainWindow::giveUp()
 	ui->giveUpButton->setEnabled(false);
         ui->message->setText(QString("%1 ->  %2   %3").arg(noteName(note1)).arg(noteName(note2)).arg(intervalName(note1, note2)));
 	answerGiven = true;
-	emit answer(QList<Note>() << note2);
+        emit gaveUp(QList<Note>() << note2);
 
 }
 
@@ -117,7 +118,7 @@ void MainWindow::guess(Note note)
                 ui->message->setText(QString("Correct!  %1 -> %2   %3").arg(noteName(note1)).arg(noteName(note2)).arg(intervalName(note1, note2)));
 		answerGiven = true;
 		ui->giveUpButton->setEnabled(false);
-		emit answer(QList<Note>() << note2);
+                emit answerFound(QList<Note>() << note2);
 	}
 	else
 	{
