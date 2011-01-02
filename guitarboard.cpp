@@ -33,9 +33,9 @@ GuitarBoard::GuitarBoard(QObject *parent): QGraphicsScene(parent),
 	// Paint a guitar board
     setBackgroundBrush(Qt::white);
     // Strings
-    for (int i = 0; i < 6; i++)  addLine(-spaceBelowBandZero, stringPosY(i), strLength/2, stringPosY(i));
+    for (int i = 0; i < 6; i++)  addLine(-spaceBelowBandZero, stringPosY(i), strLength/2 + spaceBelowBandZero, stringPosY(i));
 	// Bands
-	for (int i = 0; i < 12; i++) addLine(bandPosition(i), spaceBesideStrings, bandPosition(i), boardWidth - spaceBesideStrings);
+	for (int i = 0; i < 13; i++) addLine(bandPosition(i), spaceBesideStrings, bandPosition(i), boardWidth - spaceBesideStrings);
 
 	// Circlemarks between band 2 and 3, betweein 4 and 5, between 6 and 7 and also between 8 and 9.
 	int circlebands[] = {3, 5, 7, 9};
