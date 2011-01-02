@@ -44,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->settingsButton, SIGNAL(clicked()), SLOT(editSettings()));
     connect(this, SIGNAL(newExcercise(QList<Note>&)), guitarBoard, SLOT(newExcercise(QList<Note>&)));
     connect(this, SIGNAL(answerFound(QList<Note>&)), guitarBoard, SLOT(answerFound(QList<Note>&)));
+    connect(this, SIGNAL(answerWrong()), guitarBoard, SLOT(answerWrong()));
     connect(this, SIGNAL(gaveUp(QList<Note>&)), guitarBoard, SLOT(gaveUp(QList<Note>&)));
     connect(guitarBoard, SIGNAL(guess(Note)), SLOT(guess(Note)));
     connect(midiPlayer, SIGNAL(donePlaying()), guitarBoard, SLOT(donePlaying()));
@@ -123,6 +124,7 @@ void MainWindow::guess(Note note)
 	else
 	{
 		ui->message->setText("Wrong!");
+                emit answerWrong();
         }
 }
 
