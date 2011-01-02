@@ -43,3 +43,11 @@ FORMS    += mainwindow.ui \
             settings_dialog.ui
 
 LIBS += -L/usr/lib/ -lWildMidi
+
+RESOURCES += \
+    images.qrc
+
+OTHER_FILES += \
+    images/Rød prik med smiley.png \
+    images/Prik grøn med smiley.png \
+    images/Prik grøn.png

@@ -23,6 +23,7 @@
 #include <QTimer>
 #include "note.h"
 #include <QList>
+#include <QImage>
 
 class GuitarBoard : public QGraphicsScene
 {
@@ -40,7 +41,8 @@ signals:
 public slots:
         void donePlaying();
 	void newExcercise(QList<Note>& notes);
-	void answer(QList<Note>& notes);
+        void answerFound(QList<Note>& notes);
+        void gaveUp(QList<Note>& notes);
 
 protected:
 	void mousePressEvent(QGraphicsSceneMouseEvent *event);
@@ -50,14 +52,13 @@ private:
 	static const int strLength = 1400;
 	static const int boardWidth = 150;
 	static const int spaceBesideStrings = 10;
-	static const int circleRadius = 8;
-	static const int spaceBetweenStrings = (boardWidth - 2*spaceBesideStrings)/5;
+        static const int spaceBetweenStrings = (boardWidth - 2*spaceBesideStrings)/5;
 	static const double twelftRootOf2 = 1.0594630943593;
 
 	void showNotes(QList<Note> &notes, bool answer);
 	void clearNotes();
-	QGraphicsItem* addCircleAt(double centX, double centY, QColor color);
-	QGraphicsItem* addCircleOnString(int band, int string, QColor color);
+        QGraphicsItem* addImageAt(double centX, double centY, QImage& image);
+        QGraphicsItem* addImageOnString(int band, int string, QImage& image);
 	void removeGuessCircle();
 	double stringPosY(int n);
 	double bandPosition(int n);
@@ -70,6 +71,11 @@ private:
 	int currentString;
 	std::vector<QGraphicsItem*> tmpCircles;
 	QTimer timer;
+
+        QImage green_circle_smiley;
+        QImage green_circle;
+        QImage red_circle;
+        QImage white_circle;
 };
 
 #endif // GUITARBOARD_H
