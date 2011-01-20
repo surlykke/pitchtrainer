@@ -63,6 +63,7 @@ private:
     // Utils
     QString intervalName(Note note1, Note note2);
     QString noteName(Note n);
+    QIcon appIcon;
 };
 
 #endif // MAINWINDOW_H

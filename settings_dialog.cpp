@@ -20,10 +20,11 @@
 #include "settings.h"
 #include <QDebug>
 
-SettingsDialog::SettingsDialog(Settings *settings, QWidget *parent) :
+SettingsDialog::SettingsDialog(Settings *settings, QIcon& appIcon, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SettingsDialog)
 { 
+    setWindowIcon(appIcon);
     ui->setupUi(this);
     this->settings = settings;
     ui->instrumentBox->setCurrentIndex(settings->getInstrument());

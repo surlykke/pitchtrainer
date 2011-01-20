@@ -4,5 +4,6 @@
         <file alias="green_circle_smiley.png">images/green_circle_smiley.png</file>
         <file alias="red_circle.png">images/red_circle.png</file>
         <file alias="white_circle.png">images/white_circle.png</file>
+        <file alias="PitchTrainer.svg">images/PitchTrainer.svg</file>
     </qresource>
 </RCC>

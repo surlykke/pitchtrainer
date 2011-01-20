@@ -23,6 +23,7 @@
 #include <QCheckBox>
 #include "midiplayer.h"
 #include <QButtonGroup>
+#include <QIcon>
 
 namespace Ui {
     class SettingsDialog;
@@ -33,7 +34,7 @@ class SettingsDialog : public QDialog
     Q_OBJECT
 
 public:
-    SettingsDialog(Settings *settings, QWidget *parent = 0);
+    SettingsDialog(Settings *settings, QIcon& appIcon, QWidget *parent = 0);
     ~SettingsDialog();
     Ui::SettingsDialog *ui;
 

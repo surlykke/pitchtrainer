@@ -28,8 +28,9 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow), appIcon(":images/PitchTrainer.svg")
 {
+    setWindowIcon(appIcon);
     settings = new Settings();
     midiPlayer = new MidiPlayer(settings);
     ui->setupUi(this);
@@ -103,7 +104,7 @@ void MainWindow::giveUp()
 
 void MainWindow::editSettings()
 {
-    SettingsDialog settingsDialog(settings, this);
+    SettingsDialog settingsDialog(settings, appIcon, this);
     settingsDialog.exec();
 }
 
