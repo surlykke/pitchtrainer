@@ -134,7 +134,6 @@ void GuitarBoard::clearNotes() {
 
 
 QGraphicsItem* GuitarBoard::addImageAt(double centX, double centY, QImage& image) {
-    qDebug() << "width, height: " << image.width() << ", " << image.height();
     QPixmap pixmap;
     pixmap.convertFromImage(image);
     QGraphicsPixmapItem *item = new QGraphicsPixmapItem(pixmap);
