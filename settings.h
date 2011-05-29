@@ -2,7 +2,6 @@
 #define SETTINGS_H
 
 #include <QSettings>
-#include <note.h>
 #include <QList>
 
 class Settings : public QSettings
@@ -11,8 +10,8 @@ class Settings : public QSettings
 public:
     explicit Settings(QObject *parent = 0);
 
-    Instrument getInstrument();
-    void setInstrument(Instrument instrument);
+    int getInstrument();
+    void setInstrument(int instrument);
 
     int getExcercise();
     void setExcercise(int excercise);

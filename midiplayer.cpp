@@ -46,8 +46,9 @@ MidiPlayer::MidiPlayer(Settings *settings):  QObject(), format() {
 MidiPlayer::~MidiPlayer() {
 }
 
-void MidiPlayer::playNote(Note n)
+void MidiPlayer::playNote(int n)
 {
+    qDebug() << "-->playNote(" << n << ")";
     unsigned char noteMidi[] =  {
         0x4D, 0x54, 0x68, 0x64, 0x00, 0x00, 0x00, 0x06, // Midi header
         0x00, 0x00, 0x00, 0x01, 0x00, 0x90,             // 1 track, timedivision 144/second
@@ -61,8 +62,9 @@ void MidiPlayer::playNote(Note n)
     play(noteMidi, sizeof(noteMidi));
 }
 
-void MidiPlayer::playInterval(Note n1, Note n2)
+void MidiPlayer::playInterval(int n1, int n2)
 {
+    qDebug() << "-->playInterval(" << n1 << ", " << n2 << ")";
     unsigned char intervalMidi[] = {
         0x4D, 0x54, 0x68, 0x64, 0x00, 0x00, 0x00, 0x06, // Midi header
         0x00, 0x00, 0x00, 0x01, 0x00, 0x90,             // 1 track, timedivision 144/beat.
@@ -80,6 +82,7 @@ void MidiPlayer::playInterval(Note n1, Note n2)
 }
 
 QByteArray MidiPlayer::midi2pcm(unsigned char *mididata, unsigned long size) {
+
     unsigned char* mididataCopy = (unsigned char*) malloc(size);  // WildMidi insists on freeing the memory used to hold mididata
     memcpy(mididataCopy, mididata, size);                         // on close, so we have to make a copy of mididata
 
@@ -91,11 +94,15 @@ QByteArray MidiPlayer::midi2pcm(unsigned char *mididata, unsigned long size) {
         result.append(buf, outputsize);
     }
     WildMidi_Close(midiPtr);
+    qDebug() << "Ud af midi2pcm";
     return result;
 }
 
 void MidiPlayer::play(unsigned char *mididata, unsigned long size) {
-    if (audioOutput->state() == QAudio::ActiveState) return;
+    if (audioOutput->state() == QAudio::ActiveState) {
+      return;
+    }
+
     pcmData.setData(midi2pcm(mididata, size));
     pcmData.open(QIODevice::ReadOnly);
     audioOutput->start(&pcmData);

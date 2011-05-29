@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/qml">
+        <file>band.qml</file>
+        <file>string.qml</file>
+        <file>circle.qml</file>
+        <file>Button.qml</file>
+        <file>GuitarBoard.qml</file>
+        <file>guitarboard.js</file>
+        <file>Main.qml</file>
+        <file>main.js</file>
+        <file>BoardArea.qml</file>
+        <file>boardarea.js</file>
+    </qresource>
+</RCC>

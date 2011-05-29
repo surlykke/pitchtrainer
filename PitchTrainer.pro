@@ -19,23 +19,19 @@
 #
 #-------------------------------------------------
 
-QT       += core gui multimedia
+QT       += core gui multimedia declarative
 
 TARGET = PitchTrainer
 TEMPLATE = app
 
 
 SOURCES += main.cpp\
-           mainwindow.cpp \
-           guitarboard.cpp \
            midiplayer.cpp \
            settings_dialog.cpp \
            settings.cpp
 
-HEADERS  += mainwindow.h \
-            guitarboard.h \
+HEADERS  += \
             midiplayer.h \
-            note.h \
             settings_dialog.h \
             settings.h
 
@@ -45,9 +41,20 @@ FORMS    += mainwindow.ui \
 LIBS += -L/usr/lib/ -lWildMidi
 
 RESOURCES += \
-    images.qrc
+    images.qrc \
+    qml.qrc
 
 OTHER_FILES += \
     images/Rød prik med smiley.png \
     images/Prik grøn med smiley.png \
-    images/Prik grøn.png
+    images/Prik grøn.png \
+    band.qml \
+    string.qml \
+    circle.qml \
+    Button.qml \
+    GuitarBoard.qml \
+    guitarboard.js \
+    Main.qml \
+    main.js \
+    boardarea.js \
+    BoardArea.qml

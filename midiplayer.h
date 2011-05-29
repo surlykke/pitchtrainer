@@ -17,7 +17,6 @@
 */
 #ifndef MIDIPLAYER_H
 #define MIDIPLAYER_H
-#include "note.h"
 #include <qprocess.h>
 #include <QObject>
 #include <QAudioOutput>
@@ -30,15 +29,15 @@ class MidiPlayer: public QObject
     Q_OBJECT
 
 public:
-    MidiPlayer(Settings *settings);
+    explicit MidiPlayer(Settings *settings);
     ~MidiPlayer();
-    void playNote(Note note);
-    void playInterval(Note n1, Note n2);
 
 signals:
-    void donePlaying();
+   void donePlaying();
 
-public slots: 
+public slots:
+    void playNote(int note);
+    void playInterval(int note1, int note2);
     void pcmPlayed(QAudio::State state);
 
 private:

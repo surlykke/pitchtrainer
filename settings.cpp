@@ -5,11 +5,11 @@
 Settings::Settings(QObject *parent) : QSettings(parent) {
 }
 
-Instrument Settings::getInstrument() {
+int Settings::getInstrument() {
     return  value("instrument", 0).toInt();
 }
 
-void Settings::setInstrument(Instrument instrument) {
+void Settings::setInstrument(int instrument) {
     setValue("instrument", instrument);
 }
 
