@@ -16,8 +16,14 @@
   along with PitchTrainer.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include <QtGui/QApplication>
+#include <QDebug>
+#include <QDeclarativeView>
+#include <QDeclarativeError>
+#include <QObject>
+#include <QGraphicsObject>
 #include <QCoreApplication>
-#include "mainwindow.h"
+#include "settings.h"
+#include "midiplayer.h"
 #include <time.h>
 
 int main(int argc, char *argv[])
@@ -26,11 +32,19 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain("surlykke-it.dk");
     QCoreApplication::setApplicationName("Pitch Trainer");
 
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+    QApplication app(argc, argv);
 
-    unsigned int seed = time(0);
-    srand(seed);
-    return a.exec();
+    QDeclarativeView view;
+    view.setSource(QUrl("qrc:/qml/Main.qml"));
+    qDebug() << view.errors() << "\n";
+    QObject *obj = dynamic_cast<QObject*>(view.rootObject());
+    view.show();
+
+    Settings *settings = new Settings();
+    MidiPlayer *midiPlayer = new MidiPlayer(settings);
+
+    QObject::connect(obj, SIGNAL(play(int)), midiPlayer, SLOT(playNote(int)));
+    QObject::connect(obj, SIGNAL(playInterval(int, int)), midiPlayer, SLOT(playInterval(int, int)));
+
+    return app.exec();
 }
