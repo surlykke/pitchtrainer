@@ -1,3 +1,20 @@
+/*
+  Copyright 2010, 2011 Christian Surlykke
+
+  This file is part of PitchTrainer.
+
+  PitchTrainer is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, version 3
+
+  PitchTrainer is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with PitchTrainer.  If not, see <http://www.gnu.org/licenses/>.
+*/
 const twelftRootOf2 = 1.0594630943593;
 const looseNote =  [76, 71, 67, 62, 57, 52];
 var firstStringY;

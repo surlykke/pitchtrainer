@@ -1,4 +1,4 @@
-# Copyright 2010 Christian Surlykke 
+# Copyright 2010, 2011 Christian Surlykke
 #
 # This file is part of PitchTrainer.
 #
