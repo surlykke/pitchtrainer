@@ -22,7 +22,9 @@
 #include <QAudioOutput>
 #include <QBuffer>
 #include <QByteArray>
+#include <QMutex>
 #include "settings.h"
+#include "pcmplayer.h"
 
 class MidiPlayer: public QObject
 {
@@ -32,23 +34,16 @@ public:
     explicit MidiPlayer(Settings *settings);
     ~MidiPlayer();
 
-signals:
-   void donePlaying();
-
 public slots:
     void playNote(int note);
     void playInterval(int note1, int note2);
-    void pcmPlayed(QAudio::State state);
 
 private:
-    void play(unsigned char* mididata, unsigned long size);
-
-    QByteArray midi2pcm(unsigned char *mididata, unsigned long size);
+    void playMidi(unsigned char *mididata, unsigned long size);
 
     Settings *settings;
-    QAudioFormat format;
-    QAudioOutput *audioOutput;
-    QBuffer      pcmData;
+
+    PcmPlayer wavPlayer;
 };
 
 

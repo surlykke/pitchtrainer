@@ -27,18 +27,17 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
            midiplayer.cpp \
-           settings_dialog.cpp \
-           settings.cpp
+           settings.cpp \
+    pcmplayer.cpp
 
 HEADERS  += \
             midiplayer.h \
-            settings_dialog.h \
-            settings.h
+            settings.h \
+    pcmplayer.h
 
-FORMS    += mainwindow.ui \
-            settings_dialog.ui
+FORMS    +=
 
-LIBS += -L/usr/lib/ -lWildMidi
+LIBS += -L/usr/lib/ -L/scratchbox/users/christian/targets/HARMATTAN_X86/usr/lib/ -lWildMidi
 
 RESOURCES += \
     images.qrc \
@@ -51,10 +50,36 @@ OTHER_FILES += \
     band.qml \
     string.qml \
     circle.qml \
-    Button.qml \
     GuitarBoard.qml \
     guitarboard.js \
-    Main.qml \
     main.js \
     boardarea.js \
-    BoardArea.qml
+    BoardArea.qml \
+    qtc_packaging/debian_harmattan/rules \
+    qtc_packaging/debian_harmattan/README \
+    qtc_packaging/debian_harmattan/copyright \
+    qtc_packaging/debian_harmattan/control \
+    qtc_packaging/debian_harmattan/compat \
+    qtc_packaging/debian_harmattan/changelog \
+    PitchTrainerSettings.qml \
+    PitchTrainerMain.qml \
+    PitchTrainerRoot.qml
+
+unix:!symbian:!maemo5 {
+    target.path = /opt/PitchTrainer/bin
+    INSTALLS += target
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

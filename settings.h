@@ -3,24 +3,19 @@
 
 #include <QSettings>
 #include <QList>
+#include <QString>
 
 class Settings : public QSettings
 {
-    Q_OBJECT
+  Q_OBJECT
 public:
-    explicit Settings(QObject *parent = 0);
-
-    int getInstrument();
-    void setInstrument(int instrument);
-
-    int getExcercise();
-    void setExcercise(int excercise);
-
-    QList<bool> getIntervals();
-    void setIntervals(QList<bool> intervals);
-
-private:
-    QList<QVariant> getIntervals_helper();
+  Settings(QObject *parent = 0);
+  Q_INVOKABLE QVariant instrument();
+  Q_INVOKABLE void setInstrument(QVariant instrument);
+  Q_INVOKABLE QVariant excercise();
+  Q_INVOKABLE void setExcercise(QVariant excercise);
+  Q_INVOKABLE QList<QVariant> intervals();
+  Q_INVOKABLE void setIntervals(QList<QVariant> intervals);
 };
 
 #endif // SETTINGS_H
