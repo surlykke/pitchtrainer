@@ -26,92 +26,93 @@
 #include <QBuffer>
 #include <QAudioOutput>
 #include <QStringList>
+#include <QDateTime>
+#include <QThread>
 
 extern "C" {
 #include "wildmidi_lib.h"
 }
 
-MidiPlayer::MidiPlayer(Settings *settings):  QObject(), format() {
+MidiPlayer::MidiPlayer(Settings *settings):  QObject() {
+    qDebug() << "Ind i midiplayer constructor" << "\n";
     this->settings = settings;
     WildMidi_Init("/etc/wildmidi/wildmidi.cfg", 44100, 0);
-    format.setCodec("audio/pcm");
-    format.setByteOrder(QAudioFormat::LittleEndian);
-    format.setFrequency(44100);
-    format.setChannels(2);
-    format.setSampleSize(16);
-    format.setSampleType(QAudioFormat::SignedInt);
-    audioOutput = new QAudioOutput(format, this);
+
 }
 
 MidiPlayer::~MidiPlayer() {
+
 }
 
 void MidiPlayer::playNote(int n)
 {
     qDebug() << "-->playNote(" << n << ")";
+    unsigned char instrument = (unsigned char) settings->value("instrument").toInt();
     unsigned char noteMidi[] =  {
         0x4D, 0x54, 0x68, 0x64, 0x00, 0x00, 0x00, 0x06, // Midi header
         0x00, 0x00, 0x00, 0x01, 0x00, 0x90,             // 1 track, timedivision 144/second
         0x4D, 0x54, 0x72, 0x6B,                         // Track header
         0x00, 0x00, 0x00, 0x0F,                         // 15 bytes of event data
-        0x00, 0xc0, settings->getInstrument(),          // Set instrument
+        0x00, 0xc0, instrument,                         // Set instrument
         0x00, 0x90,    n, 0xF0,                         // note on at time 0
         0x60, 0x80,    n, 0x00,                         // note off at 96/144 beats
         0x00, 0xFF, 0x2F, 0x00                          // end of track
     };
-    play(noteMidi, sizeof(noteMidi));
+    QFile fil("/tmp/note.mid");
+    fil.open(QIODevice::WriteOnly);
+    fil.write((char*) noteMidi, sizeof(noteMidi));
+    playMidi(noteMidi, sizeof(noteMidi));
 }
 
 void MidiPlayer::playInterval(int n1, int n2)
 {
     qDebug() << "-->playInterval(" << n1 << ", " << n2 << ")";
+    unsigned char instrument = (unsigned char) settings->value("instrument").toInt();
     unsigned char intervalMidi[] = {
         0x4D, 0x54, 0x68, 0x64, 0x00, 0x00, 0x00, 0x06, // Midi header
         0x00, 0x00, 0x00, 0x01, 0x00, 0x90,             // 1 track, timedivision 144/beat.
         0x4D, 0x54, 0x72, 0x6B,                         // Track header
         0x00, 0x00, 0x00, 0x18,                         // 18 bytes of event data
-        0x00, 0xc0, settings->getInstrument(),          // Set instrument
+        0x00, 0xc0, instrument,                         // Set instrument
         0x00, 0x90,   n1, 0xF0,                         // First note on at time 0
         0x60, 0x80,   n1, 0x00,                         // First note off at 96/144 beats
         0x60, 0x90,   n2, 0xF0,                         // Second note on at 96/144 beats
         0x81, 0x40, 0x80,   n2, 0x00,                   // Second note off at 192/144 beats
         0x00, 0xFF, 0x2F, 0x00                          // end of track
     };
-
-    play(intervalMidi, sizeof(intervalMidi));
+    QFile fil("/tmp/interval.mid");
+    fil.open(QIODevice::WriteOnly);
+    fil.write((char*) intervalMidi, sizeof(intervalMidi));
+    playMidi(intervalMidi, sizeof(intervalMidi));
 }
 
-QByteArray MidiPlayer::midi2pcm(unsigned char *mididata, unsigned long size) {
-
+void MidiPlayer::playMidi(unsigned char *mididata, unsigned long size) {
     unsigned char* mididataCopy = (unsigned char*) malloc(size);  // WildMidi insists on freeing the memory used to hold mididata
-    memcpy(mididataCopy, mididata, size);                         // on close, so we have to make a copy of mididata
+    memcpy(mididataCopy, mididata, size);             // on close, so we have to make a copy of mididata
 
-    QByteArray result;
     midi* midiPtr = WildMidi_OpenBuffer(mididataCopy, size);
-    char buf[1024];
-    int outputsize;
-    while ((outputsize = WildMidi_GetOutput(midiPtr, buf, 1024)) > 0) {
-        result.append(buf, outputsize);
+    QByteArray buffer;
+    int bufsize = 1000000;
+    char buf[bufsize];
+    int converted;
+    while ((converted = WildMidi_GetOutput(midiPtr, buf, bufsize)) > 0) {
+      buffer.append(buf, converted);
     }
-    WildMidi_Close(midiPtr);
-    qDebug() << "Ud af midi2pcm";
-    return result;
-}
+    qDebug() << "Buffersize: " << buffer.size();
 
-void MidiPlayer::play(unsigned char *mididata, unsigned long size) {
-    if (audioOutput->state() == QAudio::ActiveState) {
-      return;
-    }
+    unsigned char wavHdr[] = {
+             0x52, 0x49, 0x46, 0x46, 0xac, 0x3b, 0x09, 0x00,
+             0x57, 0x41, 0x56, 0x45, 0x66, 0x6d, 0x74, 0x20,
+             0x10, 0x00, 0x00, 0x00, 0x01, 0x00, 0x02, 0x00,
+             0x48, 0x7d, 0x00, 0x00, 0x20, 0xf5, 0x01, 0x00,
+             0x04, 0x00, 0x10, 0x00, 0x64, 0x61, 0x74, 0x61,
+             0x88, 0x3b, 0x09, 0x00
+    };
 
-    pcmData.setData(midi2pcm(mididata, size));
-    pcmData.open(QIODevice::ReadOnly);
-    audioOutput->start(&pcmData);
-    connect(audioOutput,SIGNAL(stateChanged(QAudio::State)),SLOT(pcmPlayed(QAudio::State)));
- }
+    QFile fil("/tmp/output.wav");
+    fil.open(QIODevice::WriteOnly);
+    fil.write((char*) wavHdr, sizeof(wavHdr));
+    fil.write(buffer);
 
-void MidiPlayer::pcmPlayed(QAudio::State state) {
-      if(state == QAudio::IdleState) {
-          emit donePlaying();
-          pcmData.close();
-     }
+    wavPlayer.play(buffer);
 }

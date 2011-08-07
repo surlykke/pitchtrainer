@@ -1,2 +1,4 @@
 PitchTrainer.pro.user
 qtc_packaging
+moc_*
+qrc_*

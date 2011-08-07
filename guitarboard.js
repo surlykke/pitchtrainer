@@ -1,14 +1,23 @@
 const twelftRootOf2 = 1.0594630943593;
-const firstStringY = 14;
-const firstBandX = 25;
-const stringLength = 1400;
-const stringSeparation = 28;
 const looseNote =  [76, 71, 67, 62, 57, 52];
+var firstStringY;
+var firstBandX;
+var stringLength;
+var stringSeparation;
+
+const whiteImg = "qrc:images/white_circle.png";
+var dummy;
 
 function setupBoard() {
+        console.log("width: " + width);
+  firstStringY = height/12;
+  firstBandX = 0.05*width;
+  stringLength = 2*0.925*width;
+  stringSeparation = height/6;
   var stringComponent = Qt.createComponent("string.qml");
   var bandComponent = Qt.createComponent("band.qml");
   var boardAreaComponent = Qt.createComponent("BoardArea.qml");
+  var circleComponent = Qt.createComponent("circle.qml");
 
   var boardPos;
   // Place boardAreas
@@ -37,14 +46,34 @@ function setupBoard() {
     string.y = firstStringY + i*stringSeparation;
   }
 
-  // Paint bands
+  // Paint bands and circles
   var bandX = firstBandX;
   var bandSeparationF = (1 - 1/twelftRootOf2)*stringLength;
   for (var i = 0; i < 13; i ++) {
     band = bandComponent.createObject(guitarboard);
     band.y = firstStringY;
     band.x = bandX;
+
+    if (i == 2 || i == 4 || i == 6 || i == 8) {
+      var circle = circleComponent.createObject(guitarboard);
+      circle.x = Math.floor(band.x + bandSeparationF/2 - 12);
+      circle.y = Math.floor(firstStringY + 2.5*stringSeparation - 12);
+      circle.source = whiteImg;
+    }
+    else  if (i == 11) {
+      var circle1 = circleComponent.createObject(guitarboard);
+      circle1.x = Math.floor(band.x + bandSeparationF/2 - 12);
+      circle1.y = Math.floor(firstStringY + 1.5*stringSeparation - 12);
+      circle1.source = whiteImg;
+
+      var circle2 = circleComponent.createObject(guitarboard);
+      circle2.x = Math.floor(band.x + bandSeparationF/2 - 12);
+      circle2.y = Math.floor(firstStringY + 3.5*stringSeparation - 12);
+      circle2.source = whiteImg;
+    }
+
     bandX = bandX + Math.floor(bandSeparationF);
     bandSeparationF = bandSeparationF/twelftRootOf2;
   }
+
 }

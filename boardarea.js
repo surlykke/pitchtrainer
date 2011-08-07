@@ -4,6 +4,7 @@ const redImg = "qrc:images/red_circle.png";
 const noImg = "";
 
 function mainStateChanged(newState) {
+  circle.z = 122;
   if (note == main.guessedNote) {
     switch (newState) {
       case "guessRight": circle.source = greenImgSml; break;

@@ -22,29 +22,32 @@
 #include <QObject>
 #include <QGraphicsObject>
 #include <QCoreApplication>
+#include <QDeclarativeContext>
 #include "settings.h"
 #include "midiplayer.h"
 #include <time.h>
 
 int main(int argc, char *argv[])
 {
+    qDebug() << "Ind i main" << "\n";
     QCoreApplication::setOrganizationName("Surlykke IT");
     QCoreApplication::setOrganizationDomain("surlykke-it.dk");
     QCoreApplication::setApplicationName("Pitch Trainer");
 
     QApplication app(argc, argv);
+    Settings settings;
 
     QDeclarativeView view;
-    view.setSource(QUrl("qrc:/qml/Main.qml"));
+    view.rootContext()->setContextProperty("applicationSettings", &settings);
+    view.setSource(QUrl("qrc:/qml/PitchTrainerRoot.qml"));
     qDebug() << view.errors() << "\n";
     QObject *obj = dynamic_cast<QObject*>(view.rootObject());
     view.show();
 
-    Settings *settings = new Settings();
-    MidiPlayer *midiPlayer = new MidiPlayer(settings);
+    MidiPlayer midiPlayer(&settings);
 
-    QObject::connect(obj, SIGNAL(play(int)), midiPlayer, SLOT(playNote(int)));
-    QObject::connect(obj, SIGNAL(playInterval(int, int)), midiPlayer, SLOT(playInterval(int, int)));
+    QObject::connect(obj, SIGNAL(play(int)), &midiPlayer, SLOT(playNote(int)));
+    QObject::connect(obj, SIGNAL(playInterval(int, int)), &midiPlayer, SLOT(playInterval(int, int)));
 
     return app.exec();
 }

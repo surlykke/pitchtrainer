@@ -16,6 +16,8 @@ const intervalNames = [
 
 
 function newInterval() {
+  console.log("instrument: " + applicationSettings.instrument());
+  console.log("intervals: " + applicationSettings.intervals());
   var oldState = state;
   var availableIntervals = [1,2]; //FIXME
   var descending = false; // FIXME
@@ -32,19 +34,6 @@ function newInterval() {
   newInterval.responsive = false;
 }
 
-function repeat() {
-  playInterval(note1, note2);
-}
-
-function giveUp() {
-  state = "givenUp"
-}
-
-function settings() {
-  console.settings();
-}
-
-
 function guess(note) {
   console.log("Ind i guess");
   var oldState = state;
@@ -59,7 +48,6 @@ function guess(note) {
   }
   console.log("oldState: " + oldState + ", state: " + state);
   if (oldState == state) stateChanged(state);
-  console
   play(note);
 }
 
