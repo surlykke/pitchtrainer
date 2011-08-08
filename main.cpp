@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     view.setSource(QUrl("qrc:/qml/PitchTrainerRoot.qml"));
     qDebug() << view.errors() << "\n";
     QObject *obj = dynamic_cast<QObject*>(view.rootObject());
-    view.show();
+    view.showFullScreen();
 
     MidiPlayer midiPlayer(&settings);
 
