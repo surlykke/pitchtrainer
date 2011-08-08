@@ -61,14 +61,20 @@ OTHER_FILES += \
     qtc_packaging/debian_harmattan/control \
     qtc_packaging/debian_harmattan/compat \
     qtc_packaging/debian_harmattan/changelog \
-    PitchTrainerSettings.qml \
     PitchTrainerMain.qml \
-    PitchTrainerRoot.qml
+    PitchTrainerRoot.qml \
+    InstrumentChooser.qml \
+    IntervalChooser.qml \
+    ExcerciseChooser.qml
 
 unix:!symbian:!maemo5 {
     target.path = /opt/PitchTrainer/bin
     INSTALLS += target
 }
+
+
+
+
 
 
 

@@ -18,18 +18,19 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
 
-Window {
-    id: rootWindow
+SelectionDialog {
+    titleText: "Excercise"
 
-    PageStack {
-        id: pageStack
+    model: ListModel {
+        id: instruments
+        ListElement {
+            name: "Melodic intervals"
+        }
+        ListElement {
+            name: "Ascending melodic intervals"
+        }
+        ListElement {
+            name: "Descending melodic intervals"
+        }
     }
-
-    PitchTrainerMain {
-        id: pitchTrainerMain
-    }
-
-    Component.onCompleted: pageStack.push(pitchTrainerMain)
-
-
 }
