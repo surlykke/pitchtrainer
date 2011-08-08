@@ -42,8 +42,10 @@ Window {
 
         Text {
             id: text
+            color: "white"
             text: "Click 'New interval' to start an excercise..."
             font.pointSize: 20
+            height: 45
         }
 
         ButtonRow {

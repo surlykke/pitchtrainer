@@ -21,6 +21,9 @@ import com.nokia.meego 1.0
 Page {
     Column {
         Text {
+            color: "white"
+            height: 45
+            font.pointSize: 20
             text: "Settings....";
         }
         ButtonRow {
