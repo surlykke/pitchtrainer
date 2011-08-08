@@ -18,24 +18,10 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
 
-Page {
-    Column {
-        Text {
-            color: "white"
-            height: 45
-            font.pointSize: 20
-            text: "Settings....";
-        }
-        ButtonRow {
-            Button {
-                id: button1
-                text: "Done"
-                onClicked: pageStack.pop();
-            }
-        }
-    }
-}
-    /*    ListModel {
+SelectionDialog {
+    titleText: "Instrument"
+
+    model: ListModel {
         id: instruments
         ListElement {
             name: "Acoustic Grand Piano"
@@ -279,7 +265,7 @@ Page {
         }
     }
 
-*/
+}
 
 
 

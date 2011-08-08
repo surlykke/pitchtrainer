@@ -19,7 +19,7 @@ import QtQuick 1.1
 import com.nokia.meego 1.0
 import "main.js" as MainMethods
 
-Window {
+Page {
     id: main
     signal guess(int note)
     signal play(int note)
@@ -49,7 +49,6 @@ Window {
         }
 
         ButtonRow {
-            width: 800;
             exclusive: false;
             Button {
                 id: newInterval;
@@ -68,13 +67,34 @@ Window {
                 enabled: false;
                 onClicked: main.state = "givenUp"
             }
+        }
+        Text {
+            color: "white"
+            text: "Settings"
+            font.pointSize: 20
+            height: 45
+        }
+
+
+        ButtonRow {
+            exclusive: false;
             Button {
-                id: settings;
-                text: "Settings...";
-                onClicked: { pageStack.push(pitchTrainerSettings)}
+                text: "Instrument.."
+                onClicked: instrumentChooser.open()
+            }
+            Button {
+                text: "Excercise.."
+                onClicked: excerciseChooser.open()
+            }
+            Button {
+                text: "Intervals.."
+                onClicked: intervalChooser.open()
             }
         }
+
     }
+
+
 
     states: [
         State {
@@ -108,5 +128,16 @@ Window {
             }
         }
     ]
-    onStateChanged: console.log("State changed to: " + state);
+
+    InstrumentChooser {
+        id: instrumentChooser
+    }
+
+    ExcerciseChooser {
+        id: excerciseChooser
+    }
+
+    IntervalChooser {
+        id: intervalChooser
+    }
 }
