@@ -81,6 +81,7 @@ Page {
             Button {
                 text: "Instrument.."
                 onClicked: instrumentChooser.open()
+
             }
             Button {
                 text: "Excercise.."
@@ -89,6 +90,7 @@ Page {
             Button {
                 text: "Intervals.."
                 onClicked: intervalChooser.open()
+
             }
         }
 
@@ -128,6 +130,7 @@ Page {
             }
         }
     ]
+
 
     InstrumentChooser {
         id: instrumentChooser

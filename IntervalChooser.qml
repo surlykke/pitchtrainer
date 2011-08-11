@@ -20,6 +20,7 @@ import com.nokia.meego 1.0
 
 MultiSelectionDialog {
     titleText: "Intervals"
+    selectedIndexes: applicationSettings.intervals()
 
     model: ListModel {
         ListElement {
@@ -64,4 +65,9 @@ MultiSelectionDialog {
     }
 
     acceptButtonText: "Ok"
+
+
+    onAccepted: {
+        applicationSettings.setIntervals(selectedIndexes)
+    }
 }
