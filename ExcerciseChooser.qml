@@ -21,6 +21,8 @@ import com.nokia.meego 1.0
 SelectionDialog {
     titleText: "Excercise"
 
+    selectedIndex: applicationSettings.excercise();
+
     model: ListModel {
         id: instruments
         ListElement {
@@ -33,4 +35,6 @@ SelectionDialog {
             name: "Descending melodic intervals"
         }
     }
+
+    onAccepted: applicationSettings.setExcercise(selectedIndex)
 }

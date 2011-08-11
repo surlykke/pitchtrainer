@@ -21,6 +21,8 @@ import com.nokia.meego 1.0
 SelectionDialog {
     titleText: "Instrument"
 
+    selectedIndex: applicationSettings.instrument()
+
     model: ListModel {
         id: instruments
         ListElement {
@@ -263,6 +265,10 @@ SelectionDialog {
         ListElement {
             name: "Ocarina"
         }
+    }
+
+    onAccepted: {
+        applicationSettings.setInstrument(selectedIndex);;
     }
 
 }

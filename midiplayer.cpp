@@ -47,7 +47,7 @@ MidiPlayer::~MidiPlayer() {
 void MidiPlayer::playNote(int n)
 {
     qDebug() << "-->playNote(" << n << ")";
-    unsigned char instrument = (unsigned char) settings->value("instrument").toInt();
+    unsigned char instrument = (unsigned char) settings->instrument().toInt();
     unsigned char noteMidi[] =  {
         0x4D, 0x54, 0x68, 0x64, 0x00, 0x00, 0x00, 0x06, // Midi header
         0x00, 0x00, 0x00, 0x01, 0x00, 0x90,             // 1 track, timedivision 144/second
@@ -67,7 +67,7 @@ void MidiPlayer::playNote(int n)
 void MidiPlayer::playInterval(int n1, int n2)
 {
     qDebug() << "-->playInterval(" << n1 << ", " << n2 << ")";
-    unsigned char instrument = (unsigned char) settings->value("instrument").toInt();
+    unsigned char instrument = (unsigned char) settings->instrument().toInt();
     unsigned char intervalMidi[] = {
         0x4D, 0x54, 0x68, 0x64, 0x00, 0x00, 0x00, 0x06, // Midi header
         0x00, 0x00, 0x00, 0x01, 0x00, 0x90,             // 1 track, timedivision 144/beat.
