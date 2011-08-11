@@ -38,20 +38,19 @@ PcmPlayer::~PcmPlayer() {
 
 void PcmPlayer::run() {
   while (true) {
-    qDebug() << "Looper";
     queueLock.lock();
     while (queue.isEmpty()) {
       waitCondition.wait(&queueLock);
     }
-    qDebug() << "Tar af";
     QByteArray bytes = queue.dequeue();
     queueLock.unlock();
+    qDebug() << "Playing..";
     // sendToDevice(bytes);
   }
 }
 
 void PcmPlayer::sendToDevice(QByteArray bytes) {
-  qDebug() << "Ind i sendToDevice";
+  qDebug() << "In to sendToDevice";
   const char* data = bytes.constData();
   for (int index = 0; index < bytes.size(); ) {
     int written = ioDevice->write(data + index, bytes.size() - index);
@@ -60,16 +59,16 @@ void PcmPlayer::sendToDevice(QByteArray bytes) {
     }
     index += written;
   }
-  qDebug() << "Ud af sendToDevice";
+  qDebug() << "Leaving sendToDevice";
 }
 
 void PcmPlayer::play(QByteArray bytes) {
-  qDebug() << "Ind i play";
+  qDebug() << "In to play";
   queueLock.lock();
-  qDebug() << "Putter på";
+  qDebug() << "Adding";
   queue.enqueue(bytes);
   queueLock.unlock();
   qDebug() << "Vækker";
   waitCondition.wakeOne();
-  qDebug() << "Ud af play";
+  qDebug() << "Leaving play";
 }

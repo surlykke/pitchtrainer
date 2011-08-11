@@ -58,9 +58,6 @@ void MidiPlayer::playNote(int n)
         0x60, 0x80,    n, 0x00,                         // note off at 96/144 beats
         0x00, 0xFF, 0x2F, 0x00                          // end of track
     };
-    QFile fil("/tmp/note.mid");
-    fil.open(QIODevice::WriteOnly);
-    fil.write((char*) noteMidi, sizeof(noteMidi));
     playMidi(noteMidi, sizeof(noteMidi));
 }
 
@@ -80,9 +77,6 @@ void MidiPlayer::playInterval(int n1, int n2)
         0x81, 0x40, 0x80,   n2, 0x00,                   // Second note off at 192/144 beats
         0x00, 0xFF, 0x2F, 0x00                          // end of track
     };
-    QFile fil("/tmp/interval.mid");
-    fil.open(QIODevice::WriteOnly);
-    fil.write((char*) intervalMidi, sizeof(intervalMidi));
     playMidi(intervalMidi, sizeof(intervalMidi));
 }
 
@@ -108,11 +102,6 @@ void MidiPlayer::playMidi(unsigned char *mididata, unsigned long size) {
              0x04, 0x00, 0x10, 0x00, 0x64, 0x61, 0x74, 0x61,
              0x88, 0x3b, 0x09, 0x00
     };
-
-    QFile fil("/tmp/output.wav");
-    fil.open(QIODevice::WriteOnly);
-    fil.write((char*) wavHdr, sizeof(wavHdr));
-    fil.write(buffer);
 
     wavPlayer.play(buffer);
 }
